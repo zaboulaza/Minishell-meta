@@ -1,0 +1,37 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ignore_leak_readline                               :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ikayiban <ikayiban@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/05/16 11:55:34 by vmartel           #+#    #+#              #
+#    Updated: 2025/08/21 13:23:46 by ikayiban         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+{
+    readline
+    Memcheck:Leak
+    ...
+    obj:*/libreadline.so.*
+}
+{
+    history
+    Memcheck:Leak
+    ...
+    fun:add_history
+}
+{
+    bin
+    Memcheck:Leak
+    obj:/bin/*
+}
+{
+    usr
+    Memcheck:Leak
+    ...
+    obj:/usr/bin/*
+}
+
+# valgrind -q --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes --trace-children=yes --suppressions=./ignore_leak_readline ./minishell

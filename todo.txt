@@ -1,0 +1,18 @@
+FINI
+
+"" -> doit faire un token avec content "" 
+(("ss))" -> doit etre une erreur de parsing car ce qui est dans les guillemets ne comptent pas
+-> revoir les guillemets
+
+A FAIRE
+
+ok"|"
+
+alksdj f fdjs | fl nacsdck | fkldsaj && (lkajsd f| cnsv xl,as) ||adsf<fds/>fdsf'adadsf == segfault
+
+
+
+bash-5.1$ ls | wc
+     10      10      76
+bash-5.1$ > out ls | wc
+      0       0       0
