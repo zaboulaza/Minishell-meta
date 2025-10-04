@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/17 15:24:54 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/22 15:43:10 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 18:13:18 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 t_cmd	*init_ast(t_cmd *cmd, bool mini_ast_pipe)
 {
 	t_cmd	*operateur;
-
+	
 	if (cmd->next == NULL)
 		return (cmd);
 	operateur = cmd->next;

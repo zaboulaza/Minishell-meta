@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 16:31:30 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/01 15:04:58 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 21:09:33 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ int	exec_ast(t_cmd *cmd, t_general *g)
 	else if (type == CMD)
 		exec_cmd(cmd, g);
 	else if (type == SUBSHELL)
-	{
-		// renvoier dans le parsing mais on verra apres
-	}
+		exec_subshell(cmd, g);
 	free_all(g);
 	return (0);
 }
@@ -116,14 +114,28 @@ void	exec_pipe(t_cmd *cmd, t_general *g)
 	g->status = waitepid_and_status(pid2);
 }
 
-int	waitepid_and_status(pid_t pipes)
+void	exec_subshell(t_cmd *cmd, t_general *g)
 {
-	int	status;
+	pid_t pid;
 
-	waitpid(pipes, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		status = WTERMSIG(status);
-	return (status);
+	pid = fork();
+	if (pid == 0)
+	{	
+		g->one_line = ft_strdup(cmd->args[0]);
+		(free_node(g->node), free_cmd(g->cmd));
+		g->node = NULL;
+		g->cmd = NULL;
+		if (parsing_general(g, &g->tmp) == 1)
+		{
+			g->one_line = NULL;
+			free_all(g);
+			exit(1);
+		}
+		free(g->one_line);
+		g->one_line = NULL;
+		exec_ast(init_ast(g->cmd, false), g);
+		exit(g->status);
+	}
+	g->status = waitepid_and_status(pid);
+	// free_all(g);
 }

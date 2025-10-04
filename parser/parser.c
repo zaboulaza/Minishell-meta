@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:35:38 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/18 12:24:57 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 14:34:39 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	parsing_general(t_general *g, t_tmp **tmp)
 		return (1);
 	if (last_verif_parent(g->cmd) == 1)
 		return (1);
-	if (init_ast(g->cmd, false) == NULL)
-		return (1);
+	// if (init_ast(g->cmd, false) == NULL)
+	// 	return (1);
 	return (0);
 }

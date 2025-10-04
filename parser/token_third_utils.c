@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:14:29 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/01 20:29:29 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 16:21:14 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,14 @@ char	**find_arg_norm_parent(t_node *node, t_cmd *cmd, t_tmp **tmp)
 		clear_tmp(tmp);
 		cmd->type = 11;
 	}
-	while (node && (count > 0))
+	node = node->next;
+	while (node && (count > 2))
 	{
 		arg[0] = ft_strjoin_(arg[0], node->content);
 		node = node->next;
 		count--;
 	}
+	node = node->next;
 	arg[1] = NULL;
 	while (node && (node->type >= REDIR_IN && node->type <= HEREDOC))
 	{

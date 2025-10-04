@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/02 15:26:14 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 14:24:15 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
-	// printf("arg = %s\n", cmd->args[0]);
 	while (g->path[i])
 	{
 		g->path[i] = ft_strjoin(g->path[i], cmd->args[0]);
@@ -93,4 +92,16 @@ char	*remove_outer_quotes(char *str)
 	}
 	result[j] = '\0';
 	return (result);
+}
+
+int	waitepid_and_status(pid_t pipes)
+{
+	int	status;
+
+	waitpid(pipes, &status, 0);
+	if (WIFEXITED(status))
+		status = WEXITSTATUS(status);
+	else if (WIFSIGNALED(status))
+		status = WTERMSIG(status);
+	return (status);
 }

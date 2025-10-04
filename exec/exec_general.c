@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:52:52 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/29 16:34:59 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 18:12:40 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int exec(t_cmd *cmd, t_general *g)
 {
     get_path(g);
-    if (cmd->type == CMD) {
+    if (cmd->type == CMD || cmd->type == SUBSHELL) {
         if (/* built-in */ 0 ) {
             
         } else {

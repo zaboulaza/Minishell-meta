@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/02 15:24:02 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/04 14:32:26 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,35 +180,42 @@ int					exec(t_cmd *cmd, t_general *g);
 
 // exec_ast.c
 int					exec_ast(t_cmd *cmd, t_general *g);
-int					waitepid_and_status(pid_t pipes);
-// exec_ast_utils.c
 void				exec_and(t_cmd *cmd, t_general *g);
 void				exec_or(t_cmd *cmd, t_general *g);
 void				exec_pipe(t_cmd *cmd, t_general *g);
+void				exec_subshell(t_cmd *cmd, t_general *g);
+
 // exec_cmd.c
 int					exec_cmd(t_cmd *cmd, t_general *g);
 char				**removed_quoat(char **arg);
 char				*remove_outer_quotes(char *str);
-int					process_quote_content(char *str, int *i, char *result, int *j, char quote);
+int					process_quote_content(char *str, int *i, char *result,
+						int *j, char quote);
+int					waitepid_and_status(pid_t pipes);
+
 // exec_cmd_utils.c
 int					find_quote(char *str);
 int					compt_heredoc(t_cmd *cmd);
 int					redir_g(t_files *tmp_files);
 int					redir_in(t_files *tmp_files);
 int					redir_out(t_files *tmp_files);
+
 // exec_cmd_utils2.c
 int					redir_append(t_files *tmp_files);
 int					redir_heredoc(t_files *tmp_files, int compt);
 void				make_execve(t_cmd *cmd, t_general *g);
+
 // get_path.c
 void				get_path(t_general *g);
 int					ft_strncmp_(const char *s1, const char *s2, size_t n);
+
 // expand.c
 char				**expand(char **arg, t_general *g);
 int					check_if_need_to_expand(char *arg, int j);
 char				*find_in_path(char *arg, t_general *g);
 char				*ft_strjoin_one_char(char *s1, char s2);
 char				*expand_line(char *line, t_general *g);
+
 // expand_utils.c
 int					process_double_quote(char *line, int *i, char **res,
 						t_general *g);
