@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/04 14:24:15 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:14:16 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
+	printf("cmd->args[0] = %s\n", cmd->args[0]);
 	while (g->path[i])
 	{
 		g->path[i] = ft_strjoin(g->path[i], cmd->args[0]);

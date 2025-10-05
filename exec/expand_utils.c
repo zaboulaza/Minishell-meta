@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:11:41 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/01 21:12:09 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:39:31 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	process_double_quote(char *line, int *i, char **res, t_general *g)
 			*res = ft_strjoin(*res, tmp_expand);
 			free(tmp_expand);
 			(*i)++;
-			while (line[*i] && !ispacce(line[*i]) && line[*i] != '"' && line[*i] != 39)
+			while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
 				(*i)++;
 		}
 		else
@@ -54,7 +54,7 @@ int	process_variable(char *line, int *i, char **res, t_general *g)
 	*res = ft_strjoin(*res, tmp_expand);
 	free(tmp_expand);
 	(*i)++;
-	while (line[*i] && !ispacce(line[*i]) && line[*i] != '"' && line[*i] != 39)
+	while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
 		(*i)++;
 	return (*i);
 }

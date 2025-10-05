@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/02 15:21:34 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/05 18:49:52 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,9 @@ char	*find_in_path(char *arg, t_general *g)
 	char	*tmp;
 	char	*one_line;
 
+	one_line = NULL;
 	j = 1;
-	while (arg[j] && ispacce(arg[j]) != 1 && arg[j] != '"' && arg[j] != 39)
+	while (arg[j] && (ft_isalnum(arg[j]) || arg[j] == '_'))
 		j++;
 	if (j == 1)
 		return (ft_strdup("$"));
@@ -81,12 +82,11 @@ char	*find_in_path(char *arg, t_general *g)
 	while (g->env[j])
 	{
 		if (ft_strncmp_(tmp, g->env[j], len) == 0)
-		{
 			one_line = g->env[j];
-			break ;
-		}
 		j++;
 	}
+	if (!one_line)
+		return (free(tmp), ft_strdup(""));
 	one_line = ft_substr(one_line, len, ft_strlen(one_line) - len);
 	return (free(tmp), one_line);
 }
