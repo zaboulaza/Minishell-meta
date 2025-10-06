@@ -16,3 +16,11 @@ bash-5.1$ ls | wc
      10      10      76
 bash-5.1$ > out ls | wc
       0       0       0
+
+
+
+signaux : 
+
+ctrl + c
+ctrl + d
+ctrl + \
