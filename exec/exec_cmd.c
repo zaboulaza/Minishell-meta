@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/05 18:14:16 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 20:56:59 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,79 +30,65 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
-	printf("cmd->args[0] = %s\n", cmd->args[0]);
+	// printf("cmd->args[0] = %s\n", cmd->args[0]);
 	while (g->path[i])
 	{
 		g->path[i] = ft_strjoin(g->path[i], cmd->args[0]);
 		i++;
 	}
-	make_execve(cmd, g);
+	i = 0;
+	if (ft_strchr(cmd->args[0], '/') != NULL)
+		make_execve_slash(cmd, g);
+	else
+		make_execve(cmd, g);
 	return (1);
 }
 
-char	**removed_quoat(char **arg)
+void	make_execve_slash(t_cmd *cmd, t_general *g)
 {
-	int		i;
-	char	*old_arg;
+	if (access(cmd->args[0], F_OK) == 0)
+	{
+		if (access(cmd->args[0], X_OK) == 0)
+		{
+			execve(cmd->args[0], cmd->args, g->env);
+			perror("execve");
+		}
+	}
+	g->status = 127;
+}
+
+void	make_execve(t_cmd *cmd, t_general *g)
+{
+	int	i;
 
 	i = 0;
-	while (arg[i])
+	while (g->path[i] != 0)
 	{
-		if (find_quote(arg[i]) == 1)
+		if (access(g->path[i], F_OK) == 0)
 		{
-			old_arg = arg[i];
-			arg[i] = remove_outer_quotes(arg[i]);
-			free(old_arg);
+			if (access(g->path[i], X_OK) == 0)
+			{
+				execve(g->path[i], cmd->args, g->env);
+				perror("execve");
+			}
 		}
 		i++;
 	}
-	return (arg);
+	g->status = 127;
 }
 
-int	process_quote_content(char *str, int *i, char *result, int *j, char quote)
-{
-	(*i)++;
-	while (str[*i] && str[*i] != quote)
-		result[(*j)++] = str[(*i)++];
-	if (str[*i] == quote)
-		(*i)++;
-	return (*i);
-}
-
-char	*remove_outer_quotes(char *str)
-{
-	char	*result;
-	int		i;
-	int		j;
-	int		len;
-
-	len = ft_strlen(str);
-	result = malloc(len + 1);
-	if (!result)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-			process_quote_content(str, &i, result, &j, '"');
-		else if (str[i] == 39)
-			process_quote_content(str, &i, result, &j, 39);
-		else
-			result[j++] = str[i++];
-	}
-	result[j] = '\0';
-	return (result);
-}
-
-int	waitepid_and_status(pid_t pipes)
+int	waitepid_and_status(pid_t pipes, t_general *g)
 {
 	int	status;
-
+	
+	(void)g;
 	waitpid(pipes, &status, 0);
-	if (WIFEXITED(status))
-		status = WEXITSTATUS(status);
-	else if (WIFSIGNALED(status))
-		status = WTERMSIG(status);
-	return (status);
+	if (WIFSIGNALED(status))
+	{
+		g->signaled = 128 + WTERMSIG(status);
+		return 128 + WTERMSIG(status);
+	}
+	else if (WIFEXITED(status))
+		return WEXITSTATUS(status);
+	return status;
 }

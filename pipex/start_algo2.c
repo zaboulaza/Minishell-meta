@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/20 01:55:31 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/27 16:33:52 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 19:56:53 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	child_here(t_general *g, int *pipefd, int i_pipe, pid_t *pipes)
 {
 	int	nb_av;
 
-	pipes[i_pipe] = fork();
+	pipes[i_pipe] = ft_fork();
 	if (pipes[i_pipe] == 0)
 	{
 		dup2(pipefd[0], 0);
@@ -94,7 +94,7 @@ void	child_last_here(t_general *g, int *pipefd, int i_pipe, pid_t *pipes)
 {
 	int	nb_av;
 
-	pipes[i_pipe] = fork();
+	pipes[i_pipe] = ft_fork();
 	if (pipes[i_pipe] == 0)
 	{
 		pipefd[3] = open(g->av[g->ac - 1], O_CREAT | O_WRONLY | O_APPEND, 0644);

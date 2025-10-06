@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:32:25 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/01 15:02:44 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 19:11:20 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,57 @@ int	redir_heredoc(t_files *tmp_files, int compt)
 	return (compt);
 }
 
-void	make_execve(t_cmd *cmd, t_general *g)
+char	**removed_quoat(char **arg)
 {
-	int	i;
+	int		i;
+	char	*old_arg;
 
 	i = 0;
-    
-	while (g->path[i] != 0)
+	while (arg[i])
 	{
-		if (access(g->path[i], F_OK) == 0)
+		if (find_quote(arg[i]) == 1)
 		{
-			if (access(g->path[i], X_OK) == 0)
-				execve(g->path[i], cmd->args, g->env);
+			old_arg = arg[i];
+			arg[i] = remove_outer_quotes(arg[i]);
+			free(old_arg);
 		}
 		i++;
 	}
-	perror("execve");
-	g->status = 127;
+	return (arg);
+}
+
+int	process_quote_content(char *str, int *i, char *result, int *j, char quote)
+{
+	(*i)++;
+	while (str[*i] && str[*i] != quote)
+		result[(*j)++] = str[(*i)++];
+	if (str[*i] == quote)
+		(*i)++;
+	return (*i);
+}
+
+char	*remove_outer_quotes(char *str)
+{
+	char	*result;
+	int		i;
+	int		j;
+	int		len;
+
+	len = ft_strlen(str);
+	result = malloc(len + 1);
+	if (!result)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (str[i])
+	{
+		if (str[i] == '"')
+			process_quote_content(str, &i, result, &j, '"');
+		else if (str[i] == 39)
+			process_quote_content(str, &i, result, &j, 39);
+		else
+			result[j++] = str[i++];
+	}
+	result[j] = '\0';
+	return (result);
 }

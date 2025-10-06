@@ -6,7 +6,7 @@
 #    By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/01 21:12:24 by nsmail           ###   ########.fr        #
+#    Updated: 2025/10/06 18:35:27 by nsmail           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRCS = src/main.c \
        parser/token_second_utils.c \
        parser/creat_list.c \
        parser/creat_list_utils1.c \
+       parser/creat_list_utils2.c \
        parser/last_verif_parent.c \
        parser/creat_ast.c \
        exec/exec_general.c \
@@ -37,7 +38,7 @@ SRCS = src/main.c \
        exec/exec_cmd_utils2.c \
        exec/expand.c \
        exec/expand_utils.c \
-       parser/creat_list_utils2.c 
+       signals/signals.c 
 
 # Dossier des objets
 OBJDIR = obj

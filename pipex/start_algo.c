@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/09 17:20:33 by nsmail            #+#    #+#             */
-/*   Updated: 2025/07/22 21:02:41 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 19:56:53 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	start_algo(t_general *g, int ac)
 		(close(pipefd[3]), i_pipe++);
 		pipefd[0] = pipefd[2];
 	}
-	pipes[i_pipe] = fork();
+	pipes[i_pipe] = ft_fork();
 	if (pipes[i_pipe] == 0)
 		child_last(g, pipefd, i_pipe, pipes);
 	return ((close023(pipefd), waitpid_(ac, pipes, g), free(pipes), 0));
@@ -60,7 +60,7 @@ void	child(t_general *g, int *pipefd, int i_pipe, pid_t *pipes)
 {
 	int	nb_av;
 
-	pipes[i_pipe] = fork();
+	pipes[i_pipe] = ft_fork();
 	if (pipes[i_pipe] == 0)
 	{
 		if (i_pipe == 0)

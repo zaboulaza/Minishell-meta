@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 16:31:30 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/04 21:09:33 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 21:00:11 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,25 @@ void	exec_and(t_cmd *cmd, t_general *g)
 	pid_t	pid1;
 	pid_t	pid2;
 
-	pid1 = fork();
+	pid1 = ft_fork();
 	if (pid1 == 0)
 	{
 		exec_ast(cmd->left, g);
 		exit(g->status);
 	}
-	g->status = waitepid_and_status(pid1);
+	g->status = waitepid_and_status(pid1, g);
 	if (g->status != 0)
 	{
 		free_all(g);
 		exit(g->status);
 	}
-	pid2 = fork();
+	pid2 = ft_fork();
 	if (pid2 == 0)
 	{
 		exec_ast(cmd->right, g);
 		exit(g->status);
 	}
-	g->status = waitepid_and_status(pid2);
+	g->status = waitepid_and_status(pid2, g);
 }
 
 void	exec_or(t_cmd *cmd, t_general *g)
@@ -62,27 +62,27 @@ void	exec_or(t_cmd *cmd, t_general *g)
 	pid_t	pid1;
 	pid_t	pid2;
 
-	pid1 = fork();
+	pid1 = ft_fork();
 	if (pid1 == 0)
 	{
 		exec_ast(cmd->left, g);
 		free_all(g);
 		exit(g->status);
 	}
-	g->status = waitepid_and_status(pid1);
+	g->status = waitepid_and_status(pid1, g);
 	if (g->status == 0)
 	{
 		free_all(g);
 		exit(g->status);
 	}
-	pid2 = fork();
+	pid2 = ft_fork();
 	if (pid2 == 0)
 	{
 		exec_ast(cmd->right, g);
 		free_all(g);
 		exit(g->status);
 	}
-	g->status = waitepid_and_status(pid2);
+	g->status = waitepid_and_status(pid2, g);
 }
 
 void	exec_pipe(t_cmd *cmd, t_general *g)
@@ -92,37 +92,37 @@ void	exec_pipe(t_cmd *cmd, t_general *g)
 	pid_t	pid2;
 
 	pipe(pipefd);
-	pid1 = fork();
+	pid1 = ft_fork();
 	if (pid1 == 0)
 	{
 		close(pipefd[0]);
 		(dup2(pipefd[1], 1), close(pipefd[1]));
 		exec_ast(cmd->left, g);
-		(free_node(g->node), free_cmd(g->cmd));
+		free_all(g);
 		exit(g->status);
 	}
-	pid2 = fork();
+	pid2 = ft_fork();
 	if (pid2 == 0)
 	{
 		close(pipefd[1]);
 		(dup2(pipefd[0], 0), close(pipefd[0]));
 		exec_ast(cmd->right, g);
-		(free_node(g->node), free_cmd(g->cmd));
+		free_all(g);
 		exit(g->status);
 	}
-	(close(pipefd[0]), close(pipefd[1]), waitpid(pid1, NULL, 0));
-	g->status = waitepid_and_status(pid2);
+	(close(pipefd[0]), close(pipefd[1]), waitepid_and_status(pid1, g));
+	g->status = waitepid_and_status(pid2, g);
 }
 
 void	exec_subshell(t_cmd *cmd, t_general *g)
 {
 	pid_t pid;
 
-	pid = fork();
+	pid = ft_fork();
 	if (pid == 0)
 	{	
 		g->one_line = ft_strdup(cmd->args[0]);
-		(free_node(g->node), free_cmd(g->cmd));
+		free_all(g);
 		g->node = NULL;
 		g->cmd = NULL;
 		if (parsing_general(g, &g->tmp) == 1)
@@ -136,6 +136,17 @@ void	exec_subshell(t_cmd *cmd, t_general *g)
 		exec_ast(init_ast(g->cmd, false), g);
 		exit(g->status);
 	}
-	g->status = waitepid_and_status(pid);
+	g->status = waitepid_and_status(pid, g);
 	// free_all(g);
+}
+
+int ft_fork()
+{
+	int pid = fork();
+
+	if (pid == 0)
+	{
+		set_signal_child();
+	}
+	return (pid);
 }

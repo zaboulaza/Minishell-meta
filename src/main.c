@@ -6,14 +6,13 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/29 18:23:26 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/06 21:00:57 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
-#include <stdio.h>
 
-void	print_AST_test(t_cmd *command);
+volatile sig_atomic_t g_signal_status = 0;
 
 int	main(int ac, char **av, char **env)
 {
@@ -24,10 +23,15 @@ int	main(int ac, char **av, char **env)
 	{
 		g.node = NULL;
 		g.cmd = NULL;
+		g.signaled = 0;
+		g_signal_status = 0;
+		ft_signal();
 		g.one_line = readline("mini> ");
+		if (g_signal_status != 0) {
+			continue;
+		}
 		if (!g.one_line)
 		{
-			// free_all(&g, &g.tmp);
 			printf("exit\n");
 			break ;
 		}
@@ -40,19 +44,21 @@ int	main(int ac, char **av, char **env)
 				printf("ftg\n");
 				return (1);
 			}
-			if (exec(g.cmd, &g) == 1)
+			if (exec(init_ast(g.cmd, false), &g) == 1)
 			{
 				free_all(&g);
 				printf("chut\n");
 				return (1);
 			}
+			if (g.signaled == 128 + SIGINT)
+				write(2, "\n", 1);
+			else if (g.signaled == 128 + SIGQUIT)
+				write(2, "Quit (core dumped)\n", 19);
 			// print_list(g.node);
 			// print_ast(init_ast(g.cmd, false), 0);
 			// print_AST_test(init_ast(g.cmd, false));
 			// print_list_cmd(g.cmd);
 			free_all(&g);
-			// free_node(g.node);
-			// free_cmd(g.cmd);
 		}
 	}
 	free_all(&g);
