@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_third_utils4.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaboulaza <zaboulaza@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:55:59 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/15 22:38:14 by zaboulaza        ###   ########.fr       */
+/*   Updated: 2025/10/08 19:31:40 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,23 +99,37 @@ char	**heredoc_content(char *node)
 	char	**result;
 
 	all_content = ft_strdup("");
+	g_signal_status = 0;
+	ft_signal_heredoc();
 	while (1)
 	{
 		line = readline("> ");
-		if (!line)
+		if (!line || g_signal_status == 130)
 		{
-			printf("not found end-of file\n");
+			if (!line)
+				printf("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", node);
+			if (g_signal_status == 130)
+			{
+				free(all_content);
+				ft_signal();
+				return (NULL);
+			}
 			break ;
 		}
-		if (ft_strncmp(line, node) == 0)
+		if (ft_strncmp(line, node) == 0 && ft_strlen(line) == ft_strlen(node))
 		{
 			free(line);
 			break ;
 		}
 		all_content = ft_strjoin__(all_content, line);
+		free(line);
 		if (!all_content)
+		{
+			ft_signal();
 			return (NULL);
+		}
 	}
+	ft_signal();
 	result = ft_split(all_content, '\n');
 	free(all_content);
 	return (result);

@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 23:48:31 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/25 23:43:00 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/08 19:49:37 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,16 @@ t_files	*new_files(t_node *node)
 	file->mode = node->type;
 	file->path = ft_strdup(node->next->content);
 	if (node->type == HEREDOC)
+	{
 		file->heredoc_content = heredoc_content(node->next->content);
-	file->next = NULL;
+		if (!file->heredoc_content)
+		{
+			free(file->path);
+			free(file);
+			return (NULL);
+		}
+	}
+	// file->next = NULL;
 	return (file);
 }
 

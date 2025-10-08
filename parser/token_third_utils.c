@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 14:14:29 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/04 16:21:14 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/08 19:47:53 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ char	**find_arg(t_cmd *cmd, t_node *node, t_tmp **tmp)
 	{
 		while (node && (node->type >= REDIR_IN && node->type <= HEREDOC))
 		{
-			add_to_tmp_liste(node, tmp);
+			if (add_to_tmp_liste(node, tmp))
+				return (NULL);
 			node = node->next->next;
 			cur = *tmp;
 		}
@@ -99,7 +100,8 @@ char	**find_arg_norm_parent(t_node *node, t_cmd *cmd, t_tmp **tmp)
 	arg[1] = NULL;
 	while (node && (node->type >= REDIR_IN && node->type <= HEREDOC))
 	{
-		add_to_files_liste(cmd, node, tmp);
+		if (add_to_files_liste(cmd, node, tmp))
+			return (free(arg[0]), free(arg), NULL);
 		node = node->next->next;
 	}
 	return (arg);

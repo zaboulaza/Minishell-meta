@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/06 20:57:39 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/08 19:38:54 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ int								ft_fork(void);
 // signals.c
 void							set_signal_child(void);
 void							ft_signal(void);
+void							ft_signal_heredoc(void);
 void							signal_handler(int sig);
 int								sig_event(void);
 
