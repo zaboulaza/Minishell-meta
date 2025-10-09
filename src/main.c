@@ -6,13 +6,13 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/06 21:00:57 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/09 15:05:34 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-volatile sig_atomic_t g_signal_status = 0;
+volatile sig_atomic_t	g_signal_status = 0;
 
 int	main(int ac, char **av, char **env)
 {
@@ -27,12 +27,14 @@ int	main(int ac, char **av, char **env)
 		g_signal_status = 0;
 		ft_signal();
 		g.one_line = readline("mini> ");
-		if (g_signal_status != 0) {
-			continue;
+		if (g_signal_status != 0)
+		{
+			continue ;
 		}
 		if (!g.one_line)
 		{
 			printf("exit\n");
+			free_all(&g);
 			break ;
 		}
 		add_history(g.one_line);
@@ -76,7 +78,7 @@ void	creat_struct(t_general *g, int ac, char **av, char **env)
 
 void	free_all(t_general *g)
 {
-		if (g)
+	if (g)
 	{
 		if (g->one_line)
 		{
