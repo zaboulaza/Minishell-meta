@@ -6,7 +6,7 @@
 #    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/09 15:23:01 by lchapot          ###   ########.fr        #
+#    Updated: 2025/10/09 15:30:10 by lchapot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,16 @@ SRCS = src/main.c \
 	exec/expand.c \
 	exec/expand_utils.c \
 	signals/signals.c \
-	builtins/*.c
+	builtins/atoi.c \
+	builtins/cd.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/exit.c \
+	builtins/export.c \
+	builtins/free.c \
+	builtins/mini.c \
+	builtins/pwd.c \
+	builtins/unset.c \
 
 # Dossier des objets
 OBJDIR = .obj
