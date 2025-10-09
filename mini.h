@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/09 15:18:45 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/09 15:40:51 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -244,7 +244,7 @@ int								process_quote_content(char *str, int *i,
 // get_path.c
 void							get_path(t_general *g);
 int								ft_strncmp_(const char *s1, const char *s2,
-									size_t n);
+size_t n);
 
 // expand.c
 char							**expand(char **arg, t_general *g);

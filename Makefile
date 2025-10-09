@@ -6,7 +6,7 @@
 #    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/09 15:30:10 by lchapot          ###   ########.fr        #
+#    Updated: 2025/10/09 15:39:03 by lchapot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -76,6 +76,7 @@ Yellow=\033[0;33m
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
+#	@$(MAKE) -s --no-print-directory -C $(LIBFTDIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE) -o $(NAME)
 	@echo "$(UBlack)$(On_Green)Executable created ✔$(RESET)"
 
@@ -87,11 +88,13 @@ $(OBJDIR)/%.o: %.c Makefile mini.h
 
 # Règles de nettoyage
 clean:
+#	@$(MAKE) --no-print-directory -C $(LIBFTDIR) clean
 	@rm -rf $(OBJDIR)
 	@echo "$(CYAN)Objects cleaned ✔$(RESET)"
 
 fclean: clean
 	@$(RM) $(NAME)
+#	@$(MAKE) --no-print-directory -C $(LIBFTDIR) fclean
 	@echo "$(CYAN)Full clean done ✔$(RESET)"
 
 re: fclean all
