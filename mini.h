@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/08 19:38:54 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/09 15:18:45 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,27 @@ typedef struct s_node
 	int							id;
 	struct s_node				*next;
 }								t_node;
+
+typedef struct s_satoi
+{
+	long long	val;
+	int			err_code;
+}	t_satoi;
+
+typedef struct s_pwd
+{
+	char	*prev;
+	char	*tmp;
+	char	*new;
+	int		exit_status;
+}	t_pwd; 
+
+typedef struct s_env
+{
+    char *key;
+    char *value;
+    struct s_env *next;
+}   t_env;
 
 typedef struct s_tmp
 {
@@ -265,6 +286,22 @@ void							print_ast(t_cmd *node, int depth);
 void							print_indent(int depth);
 void							free_g(t_general *g);
 
+
+
+/*lubna*/
+t_satoi	ps_atoi(char *str);
+int		ft_strcmp(const char *s1, const char *s2);
+int		print_pwd(char *line);
+void	manage_exit(char *option);
+t_pwd	*move_cd(char *new_line, t_pwd *pwds, t_env *envlst);
+void	free_double(char **str);
+int		manage_echo(char *new_line);
+int		do_export(char *new_line, t_env **envlst);
+int		do_unset(char *new_line, char **env);
+
+int		get_env(char **env);
+void	init_env(t_env **env_list, char **env);
+char	*get_env_value(t_env *env, const char *key);
 #endif
 
 // garbege colector
