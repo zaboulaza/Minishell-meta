@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/06 20:56:59 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/09 19:14:20 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,19 @@ void	make_execve_slash(t_cmd *cmd, t_general *g)
 		if (access(cmd->args[0], X_OK) == 0)
 		{
 			execve(cmd->args[0], cmd->args, g->env);
-			perror("execve");
+		}
+		else
+		{
+			ft_putstr_fd("bash: ", 2);
+			ft_putstr_fd(cmd->args[0], 2);
+			ft_putstr_fd(": Permission denied\n", 2);
+			g->status = 126;
+			return;
 		}
 	}
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(cmd->args[0], 2);
+	ft_putstr_fd(": No such file or directory\n", 2);
 	g->status = 127;
 }
 
@@ -69,11 +79,13 @@ void	make_execve(t_cmd *cmd, t_general *g)
 			if (access(g->path[i], X_OK) == 0)
 			{
 				execve(g->path[i], cmd->args, g->env);
-				perror("execve");
 			}
 		}
 		i++;
 	}
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(cmd->args[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
 	g->status = 127;
 }
 
