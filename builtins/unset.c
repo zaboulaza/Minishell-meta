@@ -12,9 +12,9 @@
 
 // #include "../mini.h"
 
-// int	do_unset(char *new_line, char **env)
-// {
-// 	(void)env;
-// 	(void)new_line;
-// 	return (1);
-// }
+ int	do_unset(char *new_line, char **env)
+ {
+ 	(void)env;
+ 	(void)new_line;
+ 	return (1);
+ }

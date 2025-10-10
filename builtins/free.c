@@ -10,17 +10,17 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
-// #include "../mini.h"
+ #include "../mini.h"
 
-// void	free_double(char **str)
-// {
-// 	int	i;
+ void	free_double(char **str)
+ {
+ 	int	i;
 
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		free(str[i]);
-// 		i++;
-// 	}
-// 	free(str);
-// }
+ 	i = 0;
+ 	while (str[i])
+ 	{
+ 		free(str[i]);
+ 		i++;
+ 	}
+ 	free(str);
+ }

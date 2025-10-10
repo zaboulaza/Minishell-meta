@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/09 19:49:47 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 16:57:46 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,8 @@ typedef struct s_general
 	struct s_node				*node;
 	struct s_cmd				*cmd;
 	struct s_tmp				*tmp;
+	//struct s_env				**envlst;
+	//struct s_pwd				pwd;
 }								t_general;
 
 // Variables globales
@@ -244,8 +246,8 @@ int								process_quote_content(char *str, int *i,
 
 // get_path.c
 void							get_path(t_general *g);
-int								ft_strncmp_(const char *s1, const char *s2,
-									size_t n);
+//int								ft_strncmp_(const char *s1, const char *s2,
+//									size_t n);
 
 // expand.c
 char							**expand(char **arg, t_general *g);

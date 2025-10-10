@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_third_utils4.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:55:59 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/08 19:31:40 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 15:36:42 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ char	**heredoc_content(char *node)
 			}
 			break ;
 		}
-		if (ft_strncmp(line, node) == 0 && ft_strlen(line) == ft_strlen(node))
+		if (ft_strcmp(line, node) == 0 && ft_strlen(line) == ft_strlen(node))
 		{
 			free(line);
 			break ;

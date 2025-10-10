@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/09 19:09:20 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 15:26:30 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "../mini.h"
+ #include "../mini.h"
 
-// int	ft_strcmp(const char *s1, const char *s2)
-// {
-// 	int	i;
+ int	ft_strcmp(const char *s1, const char *s2)
+ {
+ 	int	i;
 
-// 	i = 0;
-// 	while (s1[i] && s2[i] && s1[i] == s2[i])
-// 		i++;
-// 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
-// }
+ 	i = 0;
+ 	while (s1[i] && s2[i] && s1[i] == s2[i])
+ 		i++;
+ 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
+ }
 
 
 // int	main(int ac, char **av, char **env)

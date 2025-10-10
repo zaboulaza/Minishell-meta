@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/09 15:05:34 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 17:16:26 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ int	main(int ac, char **av, char **env)
 		g_signal_status = 0;
 		ft_signal();
 		g.one_line = readline("mini> ");
-		if (g_signal_status != 0)
-		{
+		if (g_signal_status != 0) //?
 			continue ;
-		}
 		if (!g.one_line)
 		{
 			printf("exit\n");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/05 18:49:52 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 15:45:57 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ char	*find_in_path(char *arg, t_general *g)
 	j = 0;
 	while (g->env[j])
 	{
-		if (ft_strncmp_(tmp, g->env[j], len) == 0)
+		if (ft_strncmp(tmp, g->env[j], len) == 0)
 			one_line = g->env[j];
 		j++;
 	}
