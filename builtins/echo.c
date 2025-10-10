@@ -6,44 +6,33 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 17:05:37 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/10 15:18:07 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:25:22 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../mini.h"
 
- int	pass_option(char *new_line)
+ int	manage_echo(t_cmd *cmd)
  {
  	int	i;
-
- 	i = 0;
- 	while (new_line[i]) //echo -nnn
- 	{
- 		if (!ft_strncmp(new_line + i, "-n ", 3))
- 			i+=3;
- 		else
- 			break;
- 	}
- 	return (i);
- }
- int	manage_echo(char *new_line) //en vrai sera split
- {
- 	int	i; //echo sans rien = cmd not found ???
  	int	flag;
 
- 	i = 5; 
- 	if (ft_strncmp(new_line + 4, " ", 1))
- 		return (ft_putstr_fd(new_line, 2), ft_putstr_fd(": command not found\n", 2), 127);
- 	else
- 	{
- 		flag = pass_option(new_line + i); //je passe les -n bien ecrit
- 		{
- 			printf("%s", new_line + i + flag);
- 			if (!flag)
- 				printf("\n");
- 		}
- 	}
- 	// +7(l.88) et il faut tous les passer dabord
+ 	i = 1;
+	if (!cmd->args[1])
+		return (printf("\n"), 0);
+	while (cmd->args[i] && !ft_strcmp(cmd->args[i], "-n"))
+		i++;
+	flag = i;
+	if (!cmd->args[i])
+		return (0);
+	while (cmd->args[i])
+	{
+		printf("%s", cmd->args[i]);
+		if (cmd->args[i + 1])
+			printf(" ");
+		i++;
+	}
+ 	if (flag == 1)
+ 		printf("\n");
  	return (0);
- 	//l.94? comme dans printf en soit
  }

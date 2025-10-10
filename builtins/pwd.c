@@ -15,35 +15,26 @@
  char	has_option(char *line)
  {
  	int	i;
- 	int	flag;
 
- 	flag = 0;
  	i = 0;
- 	while (line[i])
- 	{
- 		if (!ft_strncmp(line + i, "pwd ", 4))
- 		{
- 			i+=4;
- 			break;
- 		}
+	if (!line)
+		return (0);
+ 	while (line[i] == '-')
  		i++;
- 	}
- 	while (line[i + flag] == '-')
- 		flag++;
- 	if (ft_isalpha(line[i + flag]) && flag <= 1)
- 		return (line[i + flag]);
- 	else if (flag > 1)  //line [i+flag] ne doit pas etre un  " "?
+ 	if (ft_isalpha(line[i]) && i == 1)
+ 		return (line[i]);
+ 	else if (i > 1)
  		return ('-');
- 	else
- 		return (0); //tt ce qui nest pas "pwd -xx" doit return 0, donc autre quoption attache aux -
+ 	return (0);
  }
 
- int	print_pwd(char *line) 
+int	print_pwd(t_cmd *cmd)
+
  {
  	char	*pwd;
  	char	result;
 
- 	result = has_option(line);
+ 	result = has_option(cmd->args[1]);
  	if (!result)
  	{
  		pwd = getcwd(NULL, 0); //check retour null
@@ -51,15 +42,7 @@
  		free(pwd);
  		return (0); //signal
  	}
- 	else if (ft_isalpha(result))
- 	{
- 		printf("pwd: bad option: -%c\n", result);
- 		return (2);
- 	}
- 	else if (result == '-')
- 	{
- 		printf("pwd: bad option: --\n");
- 		return (2);
- 	}
+	else
+ 		return (printf("pwd: bad option: -%c\n", result), 2);
  	return (0);
  }

@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/10 15:26:30 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:25:34 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,28 @@
  	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
  }
 
-
+void	exec_built_in(t_cmd *cmd, t_general *g)
+ {
+	(void)g;
+	if (!ft_strcmp(cmd->args[0], "pwd"))
+		print_pwd(cmd);
+ 	if (!ft_strcmp(cmd->args[0], "env"))
+ 		get_env(g); //ou le env recup 
+ 	if (!ft_strcmp(cmd->args[0], "exit")) //revoir le atoi
+ 		manage_exit(cmd);
+ 	if (!ft_strcmp(cmd->args[0], "echo"))
+ 		manage_echo(cmd);
+ 	if (!ft_strcmp(cmd->args[0], "cd"))
+ 		move_cd(cmd, g);
+ 	//if (!ft_strcmp(cmd->args[0], "export"))
+ 	//	do_export(cmd, g);
+ 	//if (!ft_strcmp(cmd->args[0], "unset"))
+ 	//	do_unset(cmd, g);
+ }
 // int	main(int ac, char **av, char **env)
 // {
-// 	char 	*new_line;
+// 	char 	*new_line;make
+
 // 	int		b = 0;
 // 	(void)ac;
 // 	(void)av;
