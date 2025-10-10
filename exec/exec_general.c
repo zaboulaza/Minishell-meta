@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_general.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 15:52:52 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/09 19:49:28 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/10 19:09:05 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int exec(t_cmd *cmd, t_general *g)
     get_path(g);
     if (cmd->type == CMD || cmd->type == SUBSHELL) {
         if (is_built_in(cmd) == 1) {
-            // exec_built_in(cmd, g);
+            exec_built_in(cmd, g);
         } else {
             int pid = ft_fork();
             if (pid == 0)
@@ -31,7 +31,6 @@ int exec(t_cmd *cmd, t_general *g)
         exec_ast(cmd, g);
     return (0);
 }
-
 int is_built_in(t_cmd *cmd)
 {
     if (cmd->args == NULL || cmd->args[0] == NULL)

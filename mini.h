@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/10 16:57:46 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/10 20:45:46 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ typedef struct s_general
 	struct s_node				*node;
 	struct s_cmd				*cmd;
 	struct s_tmp				*tmp;
-	//struct s_env				**envlst;
-	//struct s_pwd				pwd;
+	struct s_env				**envlst;
+	struct s_pwd				*pwd;
 }								t_general;
 
 // Variables globales
@@ -290,20 +290,20 @@ void							print_indent(int depth);
 void							free_g(t_general *g);
 
 /*lubna*/
+void							exec_built_in(t_cmd *cmd, t_general *g);
+
 t_satoi							ps_atoi(char *str);
 int								ft_strcmp(const char *s1, const char *s2);
-int								print_pwd(char *line);
-void							manage_exit(char *option);
-t_pwd							*move_cd(char *new_line, t_pwd *pwds,
-									t_env *envlst);
+int								print_pwd(t_cmd *cmd);
+void							manage_exit(t_cmd *cmd);
+void							move_cd(t_cmd *cmd, t_general *g);
 void							free_double(char **str);
-int								manage_echo(char *new_line);
+int								manage_echo(t_cmd *cmd);
 int								do_export(char *new_line, t_env **envlst);
 int								do_unset(char *new_line, char **env);
-
-int								get_env(char **env);
+int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
-char							*get_env_value(t_env *env, const char *key);
+char							*get_env_value(t_general *g, const char *key);
 #endif
 
 // garbege colector
