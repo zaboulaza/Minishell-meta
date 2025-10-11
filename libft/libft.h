@@ -6,17 +6,17 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 04:40:20 by nsmail            #+#    #+#             */
-/*   Updated: 2025/09/12 21:55:37 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/11 18:39:53 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include <stdlib.h>
-# include <unistd.h>
 # include <stdarg.h>
 # include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_list
 {
@@ -61,7 +61,7 @@ size_t				ft_strlcat(char *dest, const char *src, size_t size);
 size_t				ft_strlcpy(char *dest, const char *src, size_t size);
 size_t				ft_strlen(const char *str);
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
-int					ft_strncmp(const char *s1, const char *s2);
+int					ft_strncmp(const char *s1, const char *s2, size_t n);
 char				*ft_strnstr(const char *str1, const char *s2, size_t len);
 char				*ft_strrchr(const char *s, int c);
 char				*ft_strtrim(const char *s1, const char *set);

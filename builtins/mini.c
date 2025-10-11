@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/10 20:25:34 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/11 18:43:31 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../mini.h"
+#include "../mini.h"
 
- int	ft_strcmp(const char *s1, const char *s2)
- {
- 	int	i;
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	int	i;
 
- 	i = 0;
- 	while (s1[i] && s2[i] && s1[i] == s2[i])
- 		i++;
- 	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
- }
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return ((int)((unsigned char)s1[i] - (unsigned char)s2[i]));
+}
 
 void	exec_built_in(t_cmd *cmd, t_general *g)
- {
+{
 	(void)g;
 	if (!ft_strcmp(cmd->args[0], "pwd"))
 		print_pwd(cmd);
- 	if (!ft_strcmp(cmd->args[0], "env"))
- 		get_env(g); //ou le env recup 
- 	if (!ft_strcmp(cmd->args[0], "exit")) //revoir le atoi
- 		manage_exit(cmd);
- 	if (!ft_strcmp(cmd->args[0], "echo"))
- 		manage_echo(cmd);
- 	if (!ft_strcmp(cmd->args[0], "cd"))
- 		move_cd(cmd, g);
- 	//if (!ft_strcmp(cmd->args[0], "export"))
- 	//	do_export(cmd, g);
- 	//if (!ft_strcmp(cmd->args[0], "unset"))
- 	//	do_unset(cmd, g);
- }
+	if (!ft_strcmp(cmd->args[0], "env"))
+		get_env(g);                       // ou le env recup
+	if (!ft_strcmp(cmd->args[0], "exit")) // revoir le atoi
+		manage_exit(cmd);
+	if (!ft_strcmp(cmd->args[0], "echo"))
+		manage_echo(cmd);
+	if (!ft_strcmp(cmd->args[0], "cd"))
+		move_cd(cmd, g);
+	// if (!ft_strcmp(cmd->args[0], "export"))
+	//	do_export(cmd, g);
+	// if (!ft_strcmp(cmd->args[0], "unset"))
+	//	do_unset(cmd, g);
+}
 // int	main(int ac, char **av, char **env)
 // {
 // 	char 	*new_line;make

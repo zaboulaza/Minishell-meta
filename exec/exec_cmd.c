@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/09 19:14:20 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/11 18:50:25 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,12 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
-	// printf("cmd->args[0] = %s\n", cmd->args[0]);
+	// printf("cmd->args[1] = %s\n", cmd->args[1]);
+	if (is_built_in(cmd) == 1)
+	{
+		exec_built_in(cmd, g);
+		return (0);
+	}
 	while (g->path[i])
 	{
 		g->path[i] = ft_strjoin(g->path[i], cmd->args[0]);
@@ -41,7 +46,7 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 		make_execve_slash(cmd, g);
 	else
 		make_execve(cmd, g);
-	return (1);
+	return (0);
 }
 
 void	make_execve_slash(t_cmd *cmd, t_general *g)
