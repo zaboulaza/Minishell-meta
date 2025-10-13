@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 15:36:35 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 18:05:15 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ typedef struct s_general
 	struct s_node				*node;
 	struct s_cmd				*cmd;
 	struct s_tmp				*tmp;
-	struct s_env				**envlst;
+	struct s_env				*envlst;
 	struct s_pwd				*pwd;
 }								t_general;
 
@@ -299,11 +299,12 @@ void							manage_exit(t_cmd *cmd);
 void							move_cd(t_cmd *cmd, t_general *g);
 void							free_double(char **str);
 int								manage_echo(t_cmd *cmd);
-int								do_export(char *new_line, t_env **envlst);
+int								do_export(t_cmd *cmd, t_general *g);
 void							do_unset(t_cmd *cmd, t_general *g);
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
 char							*get_env_value(t_general *g, const char *key);
+t_env							*env_to_envlst(char **envp);
 #endif
 
 // garbege colector

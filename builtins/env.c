@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/10 20:50:28 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 18:03:23 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,51 +32,78 @@ int	get_env(t_general *g)
 		printf("%s\n", g->env[i++]);
 	return (0);
 }
-t_env *new_env_node(char *key, char *value)
+t_env *new_env_node(char *key, char *value) //ok
 {
-	t_env *node = malloc(sizeof(t_env));
+	t_env *node;
+	
+	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	node->key = ft_strdup(key);
-	node->value = ft_strdup(value);
+	//node->key = ft_strdup(key);
+	//node->value = ft_strdup(value);
+	node->key = key;
+	node->value = value;
 	node->next = NULL;
 	return (node);
 }
 void env_add_back(t_env **lst, t_env *new)
 {
+	t_env *tmp;
+
+	if (!lst || !new)
+		return ;
 	if (!*lst)
 	{
 		*lst = new;
-		return;
+		return ;
 	}
-	t_env *tmp = *lst;
+	tmp = *lst;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
 }
-void	init_env(t_env **env_list, char **env)
+static int split_env_line(char *str, char **key, char **value)
 {
-	int		i;
-	char	*sep;
-	char	*key;
-	char	*value;
-	int		key_len;
-	t_env	*node;
+	int i;
+
 	i = 0;
-	*env_list = NULL; //useless?
-	while (env[i] && i < 1)
-	{
-		sep = ft_strchr(env[i], '=');
-		if (sep)
-		{
-			key_len = sep - env[i];
-			key = ft_substr(env[i], 0, key_len);
-			value = ft_strdup(sep + 1);
-			node = new_env_node(key, value);
-			env_add_back(env_list, node);
-			free(key);
-			free(value);
-		}
+	while (str[i] && str[i] != '=')
 		i++;
-	}
+	*key = strndup(str, i);
+	if (!*key)
+		return (1);
+	if (str[i] == '=')
+		*value = strdup(str + i + 1);
+	else
+		*value = NULL;
+	if (str[i] == '=' && !*value)
+		return (free(*key), 1);
+	return (0);
+}
+
+t_env *env_to_envlst(char **envp)
+{
+    t_env   *lst;
+    t_env   *node;
+    char    *key;
+    char    *value;
+    int     i;
+
+    lst = NULL;
+    i = 0;
+    while (envp && envp[i])
+    {
+        if (split_env_line(envp[i], &key, &value))
+            return (NULL);
+        node = new_env_node(key, value);
+        if (!node)
+        {
+            free(key);
+            free(value);
+            return (NULL);
+        }
+        env_add_back(&lst, node);
+        i++;
+    }
+    return (lst);
 }

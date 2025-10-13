@@ -12,15 +12,29 @@
 
  #include "../mini.h"
 
- void	free_double(char **str)
- {
- 	int	i;
+void	free_double(char **str)
+{
+	int	i;
 
- 	i = 0;
- 	while (str[i])
- 	{
- 		free(str[i]);
- 		i++;
- 	}
- 	free(str);
- }
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	free(str);
+}
+
+ void free_envlst(t_env **lst)
+{
+	t_env *tmp;
+
+	while (*lst)
+	{
+		tmp = (*lst)->next;
+		free((*lst)->key);
+		free((*lst)->value);
+		free(*lst);
+		*lst = tmp;
+	}
+}
