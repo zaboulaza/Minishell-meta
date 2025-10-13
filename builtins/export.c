@@ -51,4 +51,3 @@ int	do_export(t_cmd *cmd, t_general *g) //ptr sur env
 	//free(val);
 	return (1);
 }
-

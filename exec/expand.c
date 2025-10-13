@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/10 15:45:57 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 20:52:00 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ char	*find_in_path(char *arg, t_general *g)
 
 	one_line = NULL;
 	j = 1;
+	if (arg[1] == '?')
+		return (ft_itoa(g->status));
 	while (arg[j] && (ft_isalnum(arg[j]) || arg[j] == '_'))
 		j++;
 	if (j == 1)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:20:13 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/13 18:39:58 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 20:03:03 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr, et pwd prev 
 		}	
 	}
 }
-

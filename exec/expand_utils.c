@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:11:41 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/05 18:39:31 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/13 20:51:41 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,16 @@ int	process_double_quote(char *line, int *i, char **res, t_general *g)
 			tmp_expand = find_in_path(&line[*i], g);
 			*res = ft_strjoin(*res, tmp_expand);
 			free(tmp_expand);
+			/* advance past '$' */
 			(*i)++;
-			while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
+			/* if it's $? advance past '?' as well */
+			if (line[*i] == '?')
 				(*i)++;
+			else
+			{
+				while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
+					(*i)++;
+			}
 		}
 		else
 			*res = ft_strjoin_one_char(*res, line[(*i)++]);
@@ -53,8 +60,15 @@ int	process_variable(char *line, int *i, char **res, t_general *g)
 	tmp_expand = find_in_path(&line[*i], g);
 	*res = ft_strjoin(*res, tmp_expand);
 	free(tmp_expand);
+	/* advance past '$' */
 	(*i)++;
-	while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
+	/* if it's $? advance past '?' as well */
+	if (line[*i] == '?')
 		(*i)++;
+	else
+	{
+		while (line[*i] && (ft_isalnum(line[*i]) || line[*i] == '_'))
+			(*i)++;
+	}
 	return (*i);
 }

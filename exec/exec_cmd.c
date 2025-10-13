@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/11 18:50:25 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/13 20:52:24 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
-	// printf("cmd->args[1] = %s\n", cmd->args[1]);
+	printf("cmd->args[0] = %s\n", cmd->args[0]);
 	if (is_built_in(cmd) == 1)
 	{
 		exec_built_in(cmd, g);
@@ -63,7 +63,7 @@ void	make_execve_slash(t_cmd *cmd, t_general *g)
 			ft_putstr_fd(cmd->args[0], 2);
 			ft_putstr_fd(": Permission denied\n", 2);
 			g->status = 126;
-			return;
+			return ;
 		}
 	}
 	ft_putstr_fd("bash: ", 2);
@@ -97,15 +97,15 @@ void	make_execve(t_cmd *cmd, t_general *g)
 int	waitepid_and_status(pid_t pipes, t_general *g)
 {
 	int	status;
-	
+
 	(void)g;
 	waitpid(pipes, &status, 0);
 	if (WIFSIGNALED(status))
 	{
 		g->signaled = 128 + WTERMSIG(status);
-		return 128 + WTERMSIG(status);
+		return (128 + WTERMSIG(status));
 	}
 	else if (WIFEXITED(status))
-		return WEXITSTATUS(status);
-	return status;
+		return (WEXITSTATUS(status));
+	return (status);
 }
