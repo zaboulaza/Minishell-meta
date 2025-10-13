@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 18:05:15 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 18:18:46 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_node
 
 typedef struct s_satoi
 {
-	long long					val;
+	long double					val;
 	int							err_code;
 }								t_satoi;
 
@@ -289,7 +289,7 @@ void							print_ast(t_cmd *node, int depth);
 void							print_indent(int depth);
 void							free_g(t_general *g);
 
-/*lubna*/
+/*BUILT INS*/
 void							exec_built_in(t_cmd *cmd, t_general *g);
 
 t_satoi							ps_atoi(char *str);

@@ -12,40 +12,48 @@
 
  #include "../mini.h"
 
-int	find_variable(char **env, char *arg)
+/* supprime un seul élément correspondant à 'key' */
+static void	unset_one(t_env **envlst, const char *key)
 {
-	size_t i;
+	t_env	*cur;
+	t_env	*prev;
 
-	i = 0;
-	while (env[i])
+	if (!envlst || !*envlst || !key)
+		return ;
+
+	cur = *envlst;
+	prev = NULL;
+	while (cur)
 	{
-		if (!ft_strncmp(env[i], arg, ft_strlen(arg)))
-			return (1);
-		i++;
+		if (strcmp(cur->key, key) == 0)
+		{
+			if (prev)
+				prev->next = cur->next;
+			else
+				*envlst = cur->next;
+			free(cur->key);
+			free(cur->value);
+			free(cur);
+			return ;
+		}
+		prev = cur;
+		cur = cur->next;
 	}
-	return (0);
+	ft_putstr_fd((char *)key, 2);
+	ft_putstr_fd(": not a valid identifier\n", 2);
 }
 //faire ca dans mon envlst
 void	do_unset(t_cmd *cmd, t_general *g) //chaque arg = une val a unset
 {
-	size_t	i;
+	int	i;
 
-	i = 1;
+	if (!cmd || !cmd->args || !g || !g->envlst)
+		return ;
+
+	i = 1; // on saute "unset"
 	while (cmd->args[i])
 	{
-		if (find_variable(g->env, cmd->args[i]))
-		{
-			ft_putstr_fd("unset_it\n", 1);
-			//ft_lstdelone(*envlst, del());
-			//exit code 0
-		}
-		else
-		{
-			ft_putstr_fd("bash: unset: ", 2);
-			ft_putstr_fd(cmd->args[i], 2);
-			ft_putstr_fd(": not a valid identifier\n", 2);
-			//g->status = 1; = //exit code 1
-		}
+		unset_one(&g->envlst, cmd->args[i]);
 		i++;
 	}
 }
