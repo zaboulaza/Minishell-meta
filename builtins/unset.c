@@ -12,7 +12,7 @@
 
  #include "../mini.h"
 
-/* supprime un seul élément correspondant à 'key' */
+
 static void	unset_one(t_env **envlst, const char *key)
 {
 	t_env	*cur;
@@ -20,7 +20,6 @@ static void	unset_one(t_env **envlst, const char *key)
 
 	if (!envlst || !*envlst || !key)
 		return ;
-
 	cur = *envlst;
 	prev = NULL;
 	while (cur)
@@ -42,15 +41,14 @@ static void	unset_one(t_env **envlst, const char *key)
 	ft_putstr_fd((char *)key, 2);
 	ft_putstr_fd(": not a valid identifier\n", 2);
 }
-//faire ca dans mon envlst
-void	do_unset(t_cmd *cmd, t_general *g) //chaque arg = une val a unset
+
+void	do_unset(t_cmd *cmd, t_general *g)
 {
 	int	i;
 
 	if (!cmd || !cmd->args || !g || !g->envlst)
 		return ;
-
-	i = 1; // on saute "unset"
+	i = 1;
 	while (cmd->args[i])
 	{
 		unset_one(&g->envlst, cmd->args[i]);
