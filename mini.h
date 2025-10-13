@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 15:09:55 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 15:36:35 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -300,7 +300,7 @@ void							move_cd(t_cmd *cmd, t_general *g);
 void							free_double(char **str);
 int								manage_echo(t_cmd *cmd);
 int								do_export(char *new_line, t_env **envlst);
-void							do_unset(t_cmd *cmd, t_general *g)
+void							do_unset(t_cmd *cmd, t_general *g);
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
 char							*get_env_value(t_general *g, const char *key);

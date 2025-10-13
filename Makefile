@@ -6,7 +6,7 @@
 #    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/13 15:02:39 by lchapot          ###   ########.fr        #
+#    Updated: 2025/10/13 16:32:47 by lchapot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCS = src/main.c \
 	builtins/exit.c \
 	builtins/export.c \
 	builtins/free.c \
-	builtins/mini.c \
+	builtins/builtins.c \
 	builtins/pwd.c \
 	builtins/unset.c \
 

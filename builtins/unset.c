@@ -25,17 +25,18 @@ int	find_variable(char **env, char *arg)
 	}
 	return (0);
 }
-
+//faire ca dans mon envlst
 void	do_unset(t_cmd *cmd, t_general *g) //chaque arg = une val a unset
 {
 	size_t	i;
 
-	i = 0;
-	while (cmds->args[i])
+	i = 1;
+	while (cmd->args[i])
 	{
-		if (find_variable(g->env, cmds->args[i]))
+		if (find_variable(g->env, cmd->args[i]))
 		{
-			ft_putstr_fd("unset_it", 1);
+			ft_putstr_fd("unset_it\n", 1);
+			//ft_lstdelone(*envlst, del());
 			//exit code 0
 		}
 		else
@@ -43,7 +44,8 @@ void	do_unset(t_cmd *cmd, t_general *g) //chaque arg = une val a unset
 			ft_putstr_fd("bash: unset: ", 2);
 			ft_putstr_fd(cmd->args[i], 2);
 			ft_putstr_fd(": not a valid identifier\n", 2);
-			//exit code 1
+			//g->status = 1; = //exit code 1
 		}
+		i++;
 	}
 }
