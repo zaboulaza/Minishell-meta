@@ -13,7 +13,7 @@
  #include "../mini.h"
 
  char	has_option(char *line)
- {
+{
  	int	i;
 
  	i = 0;
@@ -26,11 +26,11 @@
  	else if (i > 1)
  		return ('-');
  	return (0);
- }
+}
 
 int	print_pwd(t_cmd *cmd)
 
- {
+{
  	char	*pwd;
  	char	result;
 
@@ -45,4 +45,4 @@ int	print_pwd(t_cmd *cmd)
 	else
  		return (printf("pwd: bad option: -%c\n", result), 2);
  	return (0);
- }
+}

@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:20:13 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/10 20:55:50 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 14:53:50 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr
 {
 	int		i;
 	char	*home;
-
+	
 	i = 0;
 	while (cmd->args[i])
 		i++;
-	//if (pwd->tmp)
-	//	free(pwd->tmp); ?
-	g->pwd->tmp = getcwd(NULL, 0); //segfault ici
+	if (g->pwd->tmp)
+		free(g->pwd->tmp);
+	g->pwd->tmp = getcwd(NULL, 0);
 	if (i > 2)
 		ft_putstr_fd("cd: too many arguments\n", 2);
 	else if (i == 2 && (!ft_strcmp(cmd->args[1], "--") || !ft_strcmp(cmd->args[1], "~")))

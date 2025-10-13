@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/11 18:43:31 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/13 15:07:16 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	exec_built_in(t_cmd *cmd, t_general *g)
 		move_cd(cmd, g);
 	// if (!ft_strcmp(cmd->args[0], "export"))
 	//	do_export(cmd, g);
-	// if (!ft_strcmp(cmd->args[0], "unset"))
-	//	do_unset(cmd, g);
+	 if (!ft_strcmp(cmd->args[0], "unset"))
+		do_unset(cmd, g);
 }
 // int	main(int ac, char **av, char **env)
 // {

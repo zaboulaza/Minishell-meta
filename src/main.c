@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/10 17:16:26 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 14:46:33 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,9 @@ void	creat_struct(t_general *g, int ac, char **av, char **env)
 	g->av = av;
 	g->env = env;
 	g->node = NULL;
+	g->pwd = malloc(sizeof(t_pwd));
+	if (!g->pwd)
+		exit(1);
 }
 
 void	free_all(t_general *g)
