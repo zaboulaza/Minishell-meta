@@ -6,13 +6,13 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:20:13 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/13 18:38:37 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/13 18:39:58 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../mini.h"
 
-void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr
+void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr, et pwd prev ne se met pas a jour
 {
 	int		i;
 	char	*home;
@@ -21,6 +21,7 @@ void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr
 	while (cmd->args[i])
 		i++;
 	g->pwd->tmp = getcwd(NULL, 0);
+	//printf("prev");
 	if (i > 2)
 		ft_putstr_fd("cd: too many arguments\n", 2);
 	else if (i == 2 && (!cmd->args[1] || !ft_strcmp(cmd->args[1], "--") || !ft_strcmp(cmd->args[1], "~")))
