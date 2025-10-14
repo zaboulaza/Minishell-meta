@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:09:04 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/04 14:03:00 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 16:35:34 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,20 +45,20 @@ int	compt_heredoc(t_cmd *cmd)
 int	redir_g(t_files *tmp_files)
 {
 	if (tmp_files->mode == REDIR_IN)
-    {
-        if (redir_in(tmp_files) == 1)
-            return (1);
-    }
+	{
+		if (redir_in(tmp_files) == 1)
+			return (1);
+	}
 	else if (tmp_files->mode == REDIR_OUT)
-    {   
-        if (redir_out(tmp_files) == 1)
-            return (1);
-    }
+	{
+		if (redir_out(tmp_files) == 1)
+			return (1);
+	}
 	else if (tmp_files->mode == REDIR_APPEND)
-    {
-        if (redir_append(tmp_files) == 1)
-            return (1);
-    }
+	{
+		if (redir_append(tmp_files) == 1)
+			return (1);
+	}
 	return (0);
 }
 

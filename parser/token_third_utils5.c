@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_third_utils5.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zaboulaza <zaboulaza@student.42.fr>        +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 17:33:51 by zaboulaza         #+#    #+#             */
-/*   Updated: 2025/09/15 22:05:47 by zaboulaza        ###   ########.fr       */
+/*   Updated: 2025/10/14 18:15:15 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,23 @@ void	find_arg_norm3(t_cmd *cmd, t_tmp **tmp, t_tmp *cur)
 		cmd->type = 10;
 		clear_tmp(tmp);
 	}
+}
+
+void	handle_tmp_and_set_type(t_cmd *cmd, t_tmp **tmp)
+{
+	add_tmp_to_list(cmd, tmp);
+	clear_tmp(tmp);
+	cmd->type = 11;
+}
+
+t_node	*process_parent_content(t_node *node, char **arg, int count)
+{
+	node = node->next;
+	while (node && (count > 2))
+	{
+		arg[0] = ft_strjoin_(arg[0], node->content);
+		node = node->next;
+		count--;
+	}
+	return (node->next);
 }

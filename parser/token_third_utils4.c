@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_third_utils4.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/10 15:55:59 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/10 15:36:42 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/14 18:03:53 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,41 +95,14 @@ int	find_arg_norm_parent2(t_node *node)
 char	**heredoc_content(char *node)
 {
 	char	*all_content;
-	char	*line;
 	char	**result;
 
-	all_content = ft_strdup("");
 	g_signal_status = 0;
 	ft_signal_heredoc();
-	while (1)
-	{
-		line = readline("> ");
-		if (!line || g_signal_status == 130)
-		{
-			if (!line)
-				printf("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", node);
-			if (g_signal_status == 130)
-			{
-				free(all_content);
-				ft_signal();
-				return (NULL);
-			}
-			break ;
-		}
-		if (ft_strcmp(line, node) == 0 && ft_strlen(line) == ft_strlen(node))
-		{
-			free(line);
-			break ;
-		}
-		all_content = ft_strjoin__(all_content, line);
-		free(line);
-		if (!all_content)
-		{
-			ft_signal();
-			return (NULL);
-		}
-	}
+	all_content = read_all_heredoc_lines(node);
 	ft_signal();
+	if (!all_content)
+		return (NULL);
 	result = ft_split(all_content, '\n');
 	free(all_content);
 	return (result);

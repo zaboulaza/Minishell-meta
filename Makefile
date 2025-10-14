@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
+#    By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/13 16:32:47 by lchapot          ###   ########.fr        #
+#    Updated: 2025/10/14 17:54:58 by nsmail           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,7 @@ SRCS = src/main.c \
 	parser/token_third_utils3.c \
 	parser/token_third_utils4.c \
 	parser/token_third_utils5.c \
+	parser/token_third_utils6.c \
 	parser/token_second_utils.c \
 	parser/creat_list.c \
 	parser/creat_list_utils1.c \
@@ -36,9 +37,11 @@ SRCS = src/main.c \
 	exec/exec_cmd.c \
 	exec/exec_cmd_utils.c \
 	exec/exec_cmd_utils2.c \
+	exec/exec_cmd_utils3.c \
 	exec/expand.c \
 	exec/expand_utils.c \
 	signals/signals.c \
+	signals/signals2.c \
 	builtins/atoi.c \
 	builtins/cd.c \
 	builtins/echo.c \
@@ -78,7 +81,7 @@ all: $(NAME)
 $(NAME): $(OBJS) $(LIBFT)
 #	@$(MAKE) -s --no-print-directory -C $(LIBFTDIR)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT) $(READLINE) -o $(NAME)
-	@echo "       ⢀⣀⡤⠴⠶⠶⠒⠲⠦⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+	@echo "       ⢀⣀⡤⠴⠶⠶⠒⠲⠦⢤⣀⠀⠀⠀⠀⠀⠀⠀⠀⠀	 "
 	@echo "⠀⠀⠀⠀⢀⡠⠞⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠲⠤⣄⡀⠀⠀⠀⠀⠀"
 	@echo "⠀⠀⣀⡴⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣤⡿⠀⠀⠀⠀⠀"
 	@echo "⠀⢾⣅⡀⠀⠀⠀⠀⣀⠀⠀⠀⠀⠀⠀⢀⡦⠤⠄⠀⠀⢻⡀⠀⠀⠀⠀⠀"
@@ -90,7 +93,7 @@ $(NAME): $(OBJS) $(LIBFT)
 	@echo "⠀⢀⡞⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⠃⠀⠀⠀"
 	@echo "⠀⡼⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀"
 	@echo "⣾⠁⠀⢀⣠⡴⠆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⡇⠀⠀⠀⠀"
-	@echo "⠈⠛⠻⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀  "
+	@echo "⠈⠛⠻⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀   "
 	@echo "🦭            🦭             🦭   "
 	@echo "$(UBlack)$(On_Green)Executable created ✔$(RESET)"
 

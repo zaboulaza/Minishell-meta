@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 18:18:46 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/14 18:03:54 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,16 @@ char							*ft_strjoin__(char *s1, char const *s2);
 char							**cpy_char_tab(char **tab);
 void							find_arg_norm3(t_cmd *cmd, t_tmp **tmp,
 									t_tmp *cur);
+void							handle_tmp_and_set_type(t_cmd *cmd,
+									t_tmp **tmp);
+t_node							*process_parent_content(t_node *node,
+									char **arg, int count);
+// token_third_utils6.c
+char							*handle_heredoc_error(char *all_content,
+									char *line, char *node);
+char							*process_heredoc_line(char *all_content,
+									char *line);
+char							*read_all_heredoc_lines(char *node);
 // last_verif_parent.c
 int								last_verif_parent(t_cmd *cmd);
 // ##############################  token_third.c  ##########################
@@ -224,6 +234,7 @@ void							exec_pipe(t_cmd *cmd, t_general *g);
 void							exec_subshell(t_cmd *cmd, t_general *g);
 
 // exec_cmd.c
+void							join_cmd_to_paths(t_general *g, char *cmd_name);
 int								exec_cmd(t_cmd *cmd, t_general *g);
 int								waitepid_and_status(pid_t pipes, t_general *g);
 void							make_execve(t_cmd *cmd, t_general *g);
@@ -240,19 +251,24 @@ int								redir_out(t_files *tmp_files);
 int								redir_append(t_files *tmp_files);
 int								redir_heredoc(t_files *tmp_files, int compt);
 char							**removed_quoat(char **arg);
+
+// exec_cmd_utils3.c
 char							*remove_outer_quotes(char *str);
-int								process_quote_content(char *str, int *i,
-									char *result, int *j, char quote);
+int								handle_single_quote(char *str, int *i,
+									char *result, int *j);
+int								handle_double_quote(char *str, int *i,
+									char *result, int *j);
 
 // get_path.c
-void							get_path(t_general *g);
-//int								ft_strncmp_(const char *s1, const char *s2,
+void							get_path(t_general *g, int i);
+// int								ft_strncmp_(const char *s1, const char *s2,
 //									size_t n);
 
 // expand.c
 char							**expand(char **arg, t_general *g);
 int								check_if_need_to_expand(char *arg, int j);
-char							*find_in_path(char *arg, t_general *g);
+char							*find_in_path(char *arg, t_general *g, int j,
+									int len);
 char							*ft_strjoin_one_char(char *s1, char s2);
 char							*expand_line(char *line, t_general *g);
 
@@ -273,10 +289,11 @@ int								ft_fork(void);
 // signals.c
 void							set_signal_child(void);
 void							ft_signal(void);
-void							ft_signal_heredoc(void);
 void							signal_handler(int sig);
 int								sig_event(void);
-
+// signals2.c
+void							ft_signal_heredoc(void);
+void							heredoc_signal_handler(int sig);
 // ##############################  test->need to remove  ##########################
 // ##############################  test->need to remove  ##########################
 // fonction de test

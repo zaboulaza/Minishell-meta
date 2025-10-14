@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 13:32:25 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/06 19:11:20 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 16:53:27 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,40 +68,4 @@ char	**removed_quoat(char **arg)
 		i++;
 	}
 	return (arg);
-}
-
-int	process_quote_content(char *str, int *i, char *result, int *j, char quote)
-{
-	(*i)++;
-	while (str[*i] && str[*i] != quote)
-		result[(*j)++] = str[(*i)++];
-	if (str[*i] == quote)
-		(*i)++;
-	return (*i);
-}
-
-char	*remove_outer_quotes(char *str)
-{
-	char	*result;
-	int		i;
-	int		j;
-	int		len;
-
-	len = ft_strlen(str);
-	result = malloc(len + 1);
-	if (!result)
-		return (NULL);
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		if (str[i] == '"')
-			process_quote_content(str, &i, result, &j, '"');
-		else if (str[i] == 39)
-			process_quote_content(str, &i, result, &j, 39);
-		else
-			result[j++] = str[i++];
-	}
-	result[j] = '\0';
-	return (result);
 }

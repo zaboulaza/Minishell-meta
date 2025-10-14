@@ -6,19 +6,29 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 20:52:24 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 16:37:05 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
+void	join_cmd_to_paths(t_general *g, char *cmd_name)
+{
+	int	i;
+
+	i = 0;
+	while (g->path[i])
+	{
+		g->path[i] = ft_strjoin(g->path[i], cmd_name);
+		i++;
+	}
+}
+
 int	exec_cmd(t_cmd *cmd, t_general *g)
 {
-	int		i;
 	int		compt;
 	t_files	*tmp_files;
 
-	i = 0;
 	tmp_files = cmd->files;
 	compt = compt_heredoc(cmd);
 	while (tmp_files)
@@ -30,18 +40,9 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	}
 	cmd->args = expand(cmd->args, g);
 	cmd->args = removed_quoat(cmd->args);
-	printf("cmd->args[0] = %s\n", cmd->args[0]);
 	if (is_built_in(cmd) == 1)
-	{
-		exec_built_in(cmd, g);
-		return (0);
-	}
-	while (g->path[i])
-	{
-		g->path[i] = ft_strjoin(g->path[i], cmd->args[0]);
-		i++;
-	}
-	i = 0;
+		return (exec_built_in(cmd, g), 0);
+	join_cmd_to_paths(g, cmd->args[0]);
 	if (ft_strchr(cmd->args[0], '/') != NULL)
 		make_execve_slash(cmd, g);
 	else

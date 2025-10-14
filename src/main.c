@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 20:53:09 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 18:14:57 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ void	free_cmd(t_cmd *cmd)
 			file_next = file_tmp->next;
 			if (file_tmp->path)
 				free(file_tmp->path);
+			if (file_tmp->heredoc_content)
+				free_all_(file_tmp->heredoc_content);
 			free(file_tmp);
 			file_tmp = file_next;
 		}

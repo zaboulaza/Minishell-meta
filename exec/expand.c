@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 20:52:00 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 16:31:51 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char	**expand(char **arg, t_general *g)
 			old_arg = arg[i];
 			arg[i] = expand_line(arg[i], g);
 			free(old_arg);
-			// printf("arg = %s\n", arg[i]);
 		}
 		i++;
 	}
@@ -62,10 +61,8 @@ int	check_if_need_to_expand(char *arg, int j)
 	return (1);
 }
 
-char	*find_in_path(char *arg, t_general *g)
+char	*find_in_path(char *arg, t_general *g, int j, int len)
 {
-	int		j;
-	int		len;
 	char	*tmp;
 	char	*one_line;
 

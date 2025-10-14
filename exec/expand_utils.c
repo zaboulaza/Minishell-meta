@@ -6,7 +6,7 @@
 /*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/01 21:11:41 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/13 20:51:41 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/14 16:32:58 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,10 @@ int	process_double_quote(char *line, int *i, char **res, t_general *g)
 	{
 		if (line[*i] == '$')
 		{
-			tmp_expand = find_in_path(&line[*i], g);
+			tmp_expand = find_in_path(&line[*i], g, 0, 0);
 			*res = ft_strjoin(*res, tmp_expand);
 			free(tmp_expand);
-			/* advance past '$' */
 			(*i)++;
-			/* if it's $? advance past '?' as well */
 			if (line[*i] == '?')
 				(*i)++;
 			else
@@ -57,12 +55,10 @@ int	process_variable(char *line, int *i, char **res, t_general *g)
 {
 	char	*tmp_expand;
 
-	tmp_expand = find_in_path(&line[*i], g);
+	tmp_expand = find_in_path(&line[*i], g, 0, 0);
 	*res = ft_strjoin(*res, tmp_expand);
 	free(tmp_expand);
-	/* advance past '$' */
 	(*i)++;
-	/* if it's $? advance past '?' as well */
 	if (line[*i] == '?')
 		(*i)++;
 	else
