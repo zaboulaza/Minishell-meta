@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:20:13 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/13 20:03:03 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/15 15:19:54 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,13 @@ void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr, et pwd prev 
 	i = 0;
 	while (cmd->args[i])
 		i++;
-	g->pwd->tmp = getcwd(NULL, 0);
-	//printf("prev");
 	if (i > 2)
+	{
 		ft_putstr_fd("cd: too many arguments\n", 2);
-	else if (i == 2 && (!cmd->args[1] || !ft_strcmp(cmd->args[1], "--") || !ft_strcmp(cmd->args[1], "~")))
+		return ;
+	}
+	g->pwd->tmp = getcwd(NULL, 0);
+	if (i == 1 || !ft_strcmp(cmd->args[1], "--") || !ft_strcmp(cmd->args[1], "~"))
 	{
 		home = get_env_value(g, "HOME");
 		if (!home)
@@ -33,6 +35,7 @@ void	move_cd(t_cmd *cmd, t_general *g) //cd tt seul marche pas grr, et pwd prev 
 		chdir(home); //free(home);
 		g->pwd->prev = g->pwd->tmp;
 		g->pwd->new = g->pwd->prev;
+		return ;
 	}
 	else if (!ft_strcmp(cmd->args[1], "-"))
 	{
