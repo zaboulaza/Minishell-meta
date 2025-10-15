@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/13 18:36:21 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/15 15:15:31 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 char *get_env_value(t_general *g, const char *key)
 {	 
-	(void)g;
-	(void)key;
 	while (g->envlst)
 	{		 
 		if (ft_strcmp(g->envlst->key, key) == 0)
