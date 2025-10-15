@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/14 18:03:54 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/15 17:53:56 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,7 +316,7 @@ void							manage_exit(t_cmd *cmd);
 void							move_cd(t_cmd *cmd, t_general *g);
 void							free_double(char **str);
 int								manage_echo(t_cmd *cmd);
-int								do_export(t_cmd *cmd, t_general *g);
+void							do_export(t_cmd *cmd, t_general *g);
 void							do_unset(t_cmd *cmd, t_general *g);
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
