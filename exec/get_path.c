@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 16:29:54 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 18:50:58 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 18:58:38 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ char    *ft_strjoin3(const char *s1, const char *s2, const char *s3)
     res = malloc(len1 + len2 + len3 + 1);
     if (!res)
         return (NULL);
-    ft_strlcpy(res, s1, len1);
-    ft_strlcat(res, s2, (len1 + len2));
-    ft_strlcat(res, s3, (len1 + len2 + len3));
+    ft_strlcpy(res, s1, len1 + 1);
+    ft_strlcat(res, s2, (len1 + len2 + 1));
+    ft_strlcat(res, s3, (len1 + len2 + len3 + 1));
     return (res);
 }
 
@@ -82,13 +82,11 @@ void	get_path(t_general *g, int i)
 	i = 0;
 	while (env_curr[i])
 	{
-		if (ft_strncmp("PATH=", env_curr[i], 5) == 0)
+		if (!ft_strncmp("PATH=", env_curr[i], 5))
 			path_one_line = env_curr[i];
 		i++;
 	}
-	printf("test1\n");
-	path_one_line = ft_substr(path_one_line, 5, ft_strlen(path_one_line) - 5); //segfault ici
-	printf("test2\n");
+	path_one_line = ft_substr(path_one_line, 5, ft_strlen(path_one_line) - 5); //segfault ici, si path pas trouve donc strlen seg
 	path = ft_split(path_one_line, ':');
 	free(path_one_line);
 	i = -1;

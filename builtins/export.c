@@ -19,6 +19,7 @@ static t_env	*new_env_node(const char *key, const char *value)
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
+	//printf("key = [%s]\n", key);
 	node->key = ft_strdup(key);
 	node->value = NULL;
 	if (value)
@@ -61,6 +62,7 @@ static int	set_env_var(t_env **envlst, const char *key, const char *value)
 		}
 		return (0);
 	}
+
 	tmp = new_env_node(key, value);
 	if (!tmp)
 		return (1);
@@ -76,7 +78,7 @@ static int	parse_export_arg(const char *arg, char **key, char **value)
 	eq = ft_strchr(arg, '=');
 	if (eq) //si ==
 	{
-		*key = strndup(arg + 1, eq - arg); //ft_strndup
+		*key = strndup(arg, eq - arg); //ft_strndup
 		if (!*key)
 			return (1);
 		*value = ft_strdup(eq + 1);
