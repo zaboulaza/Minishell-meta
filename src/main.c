@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 17:58:26 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 18:41:59 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,17 +45,9 @@ int	main(int ac, char **av, char **env)
 		if (*g.one_line)
 		{
 			if (parsing_general(&g, &g.tmp) == 1)
-			{
-				free_all(&g);
-				printf("ftg\n");
-				return (1);
-			}
+				return (free_all(&g), printf("ftg\n"), 1);
 			if (exec(init_ast(g.cmd, false), &g) == 1)
-			{
-				free_all(&g);
-				printf("chut\n");
-				return (1);
-			}
+				return (free_all(&g), printf("chut\n"), 1);
 			if (g.signaled == 128 + SIGINT)
 				write(2, "\n", 1);
 			else if (g.signaled == 128 + SIGQUIT)
@@ -76,9 +68,6 @@ void	creat_struct(t_general *g, int ac, char **av, char **env)
 	g->node = NULL;
 	g->pwd = malloc(sizeof(t_pwd));
 	if (!g->pwd)
-		exit(1);
-	g->envlst = malloc(sizeof(t_env));
-	if (!g->envlst)
 		exit(1);
 }
 
