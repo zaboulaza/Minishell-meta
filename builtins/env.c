@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/15 15:15:31 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 12:40:37 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,11 @@ char *get_env_value(t_general *g, const char *key)
 }
 int	get_env(t_general *g)
 {
-	int	i;
-	i = 0;
-	while (g->env[i])
-		printf("%s\n", g->env[i++]);
+	while (g->envlst)
+	{
+		printf("%s=%s\n", g->envlst->key, g->envlst->value);
+		g->envlst = g->envlst->next;
+	}
 	return (0);
 }
 t_env *new_env_node(char *key, char *value) //ok

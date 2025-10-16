@@ -10,8 +10,7 @@
 // /*                                                                            */
 // /* ************************************************************************** */
 
- #include "../mini.h"
-
+#include "../mini.h"
 
 static void	unset_one(t_env **envlst, const char *key)
 {

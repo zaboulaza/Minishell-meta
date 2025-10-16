@@ -82,7 +82,7 @@ static int	set_env_var(t_env **envlst, const char *key, const char *value)
 	return (0);
 }
 
-/* === Parse "VAR=value" ou "VAR" === */
+/*Parse "VAR=value" ou "VAR"*/
 static int	parse_export_arg(const char *arg, char **key, char **value)
 {
 	char	*eq;
@@ -106,11 +106,12 @@ static int	parse_export_arg(const char *arg, char **key, char **value)
 	}
 	return (0);
 }
+
 void	do_export(t_cmd *cmd, t_general *g)
 {
-	int i;
- 	char *key;
- 	char *value;
+	int		i;
+ 	char	*key;
+ 	char	*value;
 
 	if (!cmd || !cmd->args || !g)
 		return ;
