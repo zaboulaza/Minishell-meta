@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/16 15:55:36 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 17:01:56 by nsmail           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_built_in(t_cmd *cmd, t_general *g)
 	if (!ft_strcmp(cmd->args[0], "pwd"))
 		print_pwd(cmd);
 	if (!ft_strcmp(cmd->args[0], "env"))
-		get_env(g);
+		print_env(g);
 	if (!ft_strcmp(cmd->args[0], "exit")) // revoir le atoi
 		manage_exit(cmd, g);
 	if (!ft_strcmp(cmd->args[0], "echo"))
