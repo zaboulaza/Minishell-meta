@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   atoi.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 17:21:10 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/14 15:05:36 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 16:52:52 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
-
-// int	full_space(char *str)
-//{
-//	int	i;
-
-//	i = 0;
-//	while (str[i])
-//	{
-//		if (str[i] != 32)
-//			return (0);
-//		i++;
-//	}
-//	return (1);
-//}
 
 t_satoi	ps_atoi(char *str)
 {
@@ -43,8 +29,6 @@ t_satoi	ps_atoi(char *str)
 	}
 	while (str[i])
 	{
-		// if (str[i] == 32 && full_space(str + i))
-		//	return (res.val *= sign, res);
 		if (!ft_isdigit(str[i]))
 			return (res.err_code = -1, res);
 		res.val *= 10;

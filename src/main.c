@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/14 18:14:57 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 14:37:22 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av, char **env)
 	t_general	g;
 
 	creat_struct(&g, ac, av, env);
+	g.envlst = env_to_envlst(env);
 	while (1)
 	{
 		g.node = NULL;
@@ -27,7 +28,6 @@ int	main(int ac, char **av, char **env)
 		g_signal_status = 0;
 		ft_signal();
 		g.one_line = readline("mini> ");
-		g.envlst = env_to_envlst(env);
 		if (!g.envlst)
 			return (perror("env_to_envlst"), 1);
 		if (g_signal_status != 0)

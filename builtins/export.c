@@ -12,18 +12,6 @@
 
  #include "../mini.h"
 
-void print_export(t_env *env)
-{
-	while (env)
-	{
-		printf("declare -x %s", env->key);
-		if (env->value)
-			printf("=\"%s\"", env->value);
-		printf("\n");
-		env = env->next;
-	}
-}
-
 static t_env	*new_env_node(const char *key, const char *value)
 {
 	t_env	*node;
@@ -31,11 +19,11 @@ static t_env	*new_env_node(const char *key, const char *value)
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	node->key = strdup(key);
+	node->key = ft_strdup(key);
 	node->value = NULL;
 	if (value)
 	{
-		node->value = strdup(value);
+		node->value = ft_strdup(value);
 		if (!node->value)
 			return (free(node->key), free(node), NULL);
 	}
@@ -48,14 +36,13 @@ static t_env	*find_env(t_env *envlst, const char *key)
 {
 	while (envlst)
 	{
-		if (strcmp(envlst->key, key) == 0)
+		if (ft_strcmp(envlst->key, key) == 0)
 			return (envlst);
 		envlst = envlst->next;
 	}
 	return (NULL);
 }
 
-/* === Ajoute ou met à jour une variable === */
 static int	set_env_var(t_env **envlst, const char *key, const char *value)
 {
 	t_env	*found;
@@ -68,7 +55,7 @@ static int	set_env_var(t_env **envlst, const char *key, const char *value)
 		found->value = NULL;
 		if (value)
 		{
-			found->value = strdup(value);
+			found->value = ft_strdup(value);
 			if (!found->value)
 				return (1);
 		}
@@ -82,24 +69,23 @@ static int	set_env_var(t_env **envlst, const char *key, const char *value)
 	return (0);
 }
 
-/*Parse "VAR=value" ou "VAR"*/
 static int	parse_export_arg(const char *arg, char **key, char **value)
 {
 	char	*eq;
 
-	eq = strchr(arg, '=');
-	if (eq)
+	eq = ft_strchr(arg, '=');
+	if (eq) //si ==
 	{
-		*key = strndup(arg, eq - arg);
+		*key = strndup(arg + 1, eq - arg); //ft_strndup
 		if (!*key)
 			return (1);
-		*value = strdup(eq + 1);
+		*value = ft_strdup(eq + 1);
 		if (!*value)
 			return (free(*key), 1);
 	}
 	else
 	{
-		*key = strdup(arg);
+		*key = ft_strdup(arg);
 		if (!*key)
 			return (1);
 		*value = NULL;
@@ -122,7 +108,7 @@ void	do_export(t_cmd *cmd, t_general *g)
 	{
 		key = NULL;
 		value = NULL;
-		if (parse_export_arg(cmd->args[i], &key, &value) == 0)
+		if (!parse_export_arg(cmd->args[i], &key, &value))
 		{
 			set_env_var(&g->envlst, key, value);
 			free(key);

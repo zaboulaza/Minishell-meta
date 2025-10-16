@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/16 12:40:37 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 16:54:24 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,29 +22,20 @@ char *get_env_value(t_general *g, const char *key)
 	}	 
 	return (NULL);
 }
-int	get_env(t_general *g)
-{
-	while (g->envlst)
-	{
-		printf("%s=%s\n", g->envlst->key, g->envlst->value);
-		g->envlst = g->envlst->next;
-	}
-	return (0);
-}
-t_env *new_env_node(char *key, char *value) //ok
+
+t_env *new_env_node(char *key, char *value)
 {
 	t_env *node;
 	
 	node = malloc(sizeof(t_env));
 	if (!node)
 		return (NULL);
-	//node->key = ft_strdup(key);
-	//node->value = ft_strdup(value);
 	node->key = key;
 	node->value = value;
 	node->next = NULL;
 	return (node);
 }
+
 void env_add_back(t_env **lst, t_env *new)
 {
 	t_env *tmp;
@@ -61,6 +52,7 @@ void env_add_back(t_env **lst, t_env *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
+
 static int split_env_line(char *str, char **key, char **value)
 {
 	int i;
@@ -68,11 +60,11 @@ static int split_env_line(char *str, char **key, char **value)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	*key = strndup(str, i);
+	*key = strndup(str, i); //ft_strndup
 	if (!*key)
 		return (1);
 	if (str[i] == '=')
-		*value = strdup(str + i + 1);
+		*value = ft_strdup(str + i + 1);
 	else
 		*value = NULL;
 	if (str[i] == '=' && !*value)
