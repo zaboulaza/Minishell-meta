@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/16 17:01:56 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 17:25:32 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,3 +40,8 @@ void	exec_built_in(t_cmd *cmd, t_general *g)
 	 if (!ft_strcmp(cmd->args[0], "unset"))
 		do_unset(cmd, g);
 }
+
+//char **envlist_to_env(char **env, t_general *g)
+//{
+	
+//}

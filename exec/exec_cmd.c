@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/14 16:37:05 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 17:19:31 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 
 void	make_execve_slash(t_cmd *cmd, t_general *g)
 {
+	// list to char **
 	if (access(cmd->args[0], F_OK) == 0)
 	{
 		if (access(cmd->args[0], X_OK) == 0)
@@ -76,6 +77,7 @@ void	make_execve_slash(t_cmd *cmd, t_general *g)
 void	make_execve(t_cmd *cmd, t_general *g)
 {
 	int	i;
+	// list to char **
 
 	i = 0;
 	while (g->path[i] != 0)

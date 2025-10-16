@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 14:37:22 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 17:58:26 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int ac, char **av, char **env)
 		g.signaled = 0;
 		g_signal_status = 0;
 		ft_signal();
-		g.one_line = readline("mini> ");
+		g.one_line = readline("mini ✗ ");
 		if (!g.envlst)
 			return (perror("env_to_envlst"), 1);
 		if (g_signal_status != 0)
@@ -77,6 +77,9 @@ void	creat_struct(t_general *g, int ac, char **av, char **env)
 	g->pwd = malloc(sizeof(t_pwd));
 	if (!g->pwd)
 		exit(1);
+	g->envlst = malloc(sizeof(t_env));
+	if (!g->envlst)
+		exit(1);
 }
 
 void	free_all(t_general *g)
@@ -103,6 +106,7 @@ void	free_all(t_general *g)
 			free_all_(g->path);
 			g->path = NULL;
 		}
+		//free envlst
 	}
 }
 

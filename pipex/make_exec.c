@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   make_exec.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/10 05:07:14 by nsmail            #+#    #+#             */
-/*   Updated: 2025/07/22 21:02:09 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 17:23:09 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	start_exec(t_general *g, int i_av)
 	int	i;
 
 	i = 0;
+	// list to char **
 	if (is_ispace(g->av, i_av) == 1)
 	{
 		ft_putstr_fd("empty command\n", 2);
