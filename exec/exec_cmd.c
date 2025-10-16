@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/27 20:57:32 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 17:19:31 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 19:28:18 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	join_cmd_to_paths(t_general *g, char *cmd_name)
 	int	i;
 
 	i = 0;
+	if (!g->path)
+		return ;
 	while (g->path[i])
 	{
 		g->path[i] = ft_strjoin(g->path[i], cmd_name);
@@ -34,7 +36,7 @@ int	exec_cmd(t_cmd *cmd, t_general *g)
 	while (tmp_files)
 	{
 		if (redir_g(tmp_files) == 1)
-			return (1);
+		return (1);
 		compt = redir_heredoc(tmp_files, compt);
 		tmp_files = tmp_files->next;
 	}
@@ -77,19 +79,19 @@ void	make_execve_slash(t_cmd *cmd, t_general *g)
 void	make_execve(t_cmd *cmd, t_general *g)
 {
 	int	i;
-	// list to char **
 
 	i = 0;
-	while (g->path[i] != 0)
+	if (g->path)
 	{
-		if (access(g->path[i], F_OK) == 0)
+		while (g->path[i] != 0)
 		{
-			if (access(g->path[i], X_OK) == 0)
+			if (access(g->path[i], F_OK) == 0)
 			{
-				execve(g->path[i], cmd->args, g->env);
+				if (access(g->path[i], X_OK) == 0)
+					execve(g->path[i], cmd->args, g->env);
 			}
+			i++;
 		}
-		i++;
 	}
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd->args[0], 2);
