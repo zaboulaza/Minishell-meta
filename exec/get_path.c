@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 16:29:54 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 18:58:38 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 19:13:52 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,14 +71,14 @@ void	get_path(t_general *g, int i)
 {
 	char	*path_one_line;
 	char	**path;
-	char	**env_curr = NULL;
+	char	**env_curr;
 
-	if (g->env == NULL)
+	env_curr = lst_to_envp(g->envlst);
+	if (!env_curr)
 	{
 		g->path = NULL;
 		return ;
 	}
-	env_curr = lst_to_envp(g->envlst);
 	i = 0;
 	while (env_curr[i])
 	{
@@ -86,7 +86,9 @@ void	get_path(t_general *g, int i)
 			path_one_line = env_curr[i];
 		i++;
 	}
-	path_one_line = ft_substr(path_one_line, 5, ft_strlen(path_one_line) - 5); //segfault ici, si path pas trouve donc strlen seg
+	if (!path_one_line)
+		return ;
+	path_one_line = ft_substr(path_one_line, 5, ft_strlen(path_one_line) - 5);
 	path = ft_split(path_one_line, ':');
 	free(path_one_line);
 	i = -1;
