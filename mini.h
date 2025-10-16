@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mini.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/14 18:03:54 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/16 16:55:19 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -312,16 +312,19 @@ void							exec_built_in(t_cmd *cmd, t_general *g);
 t_satoi							ps_atoi(char *str);
 int								ft_strcmp(const char *s1, const char *s2);
 int								print_pwd(t_cmd *cmd);
-void							manage_exit(t_cmd *cmd);
+void	manage_exit(t_cmd *cmd, t_general *g);
 void							move_cd(t_cmd *cmd, t_general *g);
 void							free_double(char **str);
 int								manage_echo(t_cmd *cmd);
-int								do_export(t_cmd *cmd, t_general *g);
+void							do_export(t_cmd *cmd, t_general *g);
 void							do_unset(t_cmd *cmd, t_general *g);
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
 char							*get_env_value(t_general *g, const char *key);
 t_env							*env_to_envlst(char **envp);
+int								print_env(t_general *g);
+void							print_export(t_env *env);
+
 #endif
 
 // garbege colector

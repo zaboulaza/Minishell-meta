@@ -12,42 +12,108 @@
 
  #include "../mini.h"
 
-void print_export(t_env *env)
+static t_env	*new_env_node(const char *key, const char *value)
 {
-	// trie ta liste si besoin
-	while (env)
+	t_env	*node;
+
+	node = malloc(sizeof(t_env));
+	if (!node)
+		return (NULL);
+	node->key = ft_strdup(key);
+	node->value = NULL;
+	if (value)
 	{
-		printf("declare -x %s", env->key);
-		if (env->value)
-			printf("=\"%s\"", env->value);
-		printf("\n");
-		env = env->next;
+		node->value = ft_strdup(value);
+		if (!node->value)
+			return (free(node->key), free(node), NULL);
 	}
+	node->next = NULL;
+	return (node);
 }
 
-int	do_export(t_cmd *cmd, t_general *g) //ptr sur env
+/* === Cherche une variable existante === */
+static t_env	*find_env(t_env *envlst, const char *key)
 {
- 	//si pas arg, affiche les variables differement que env
- 	//char *key = extract_key(cmd->args);
- 	//char *val = extract_value(cmd->args);
+	while (envlst)
+	{
+		if (ft_strcmp(envlst->key, key) == 0)
+			return (envlst);
+		envlst = envlst->next;
+	}
+	return (NULL);
+}
 
-	if (!cmd->args[1])
+static int	set_env_var(t_env **envlst, const char *key, const char *value)
+{
+	t_env	*found;
+	t_env	*tmp;
+
+	found = find_env(*envlst, key);
+	if (found)
+	{
+		free(found->value);
+		found->value = NULL;
+		if (value)
+		{
+			found->value = ft_strdup(value);
+			if (!found->value)
+				return (1);
+		}
+		return (0);
+	}
+	tmp = new_env_node(key, value);
+	if (!tmp)
+		return (1);
+	tmp->next = *envlst;
+	*envlst = tmp;
+	return (0);
+}
+
+static int	parse_export_arg(const char *arg, char **key, char **value)
+{
+	char	*eq;
+
+	eq = ft_strchr(arg, '=');
+	if (eq) //si ==
+	{
+		*key = strndup(arg + 1, eq - arg); //ft_strndup
+		if (!*key)
+			return (1);
+		*value = ft_strdup(eq + 1);
+		if (!*value)
+			return (free(*key), 1);
+	}
+	else
+	{
+		*key = ft_strdup(arg);
+		if (!*key)
+			return (1);
+		*value = NULL;
+	}
+	return (0);
+}
+
+void	do_export(t_cmd *cmd, t_general *g)
+{
+	int		i;
+ 	char	*key;
+ 	char	*value;
+
+	if (!cmd || !cmd->args || !g)
+		return ;
+	if (!cmd->args[1])//export != env
 		print_export(g->envlst);
-	//if (!is_valid_identifier(cmd->args[1]))
-	//return (ft_putstr_fd("export: `%s`: not a valid identifier\n", 2),0);
-	//if (find_env(g->*env, key)) //variable connue dans env
-	//{
-	//	if (ft_strchr(cmd->args[1], '=')) //found
-	//	{
-	//		free(env->value);
-	//		env->value = ft_strdup(val);
-	//	}
-	//}
-	//else
-	//{
-	//	add_env(env, key, value);
-	//}
-	//free(key);
-	//free(val);
-	return (1);
+	i = 1;
+	while (cmd->args[i])
+	{
+		key = NULL;
+		value = NULL;
+		if (!parse_export_arg(cmd->args[i], &key, &value))
+		{
+			set_env_var(&g->envlst, key, value);
+			free(key);
+			free(value);
+		}
+		i++;
+	}
 }

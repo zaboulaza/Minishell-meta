@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+         #
+#    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/14 17:54:58 by nsmail           ###   ########.fr        #
+#    Updated: 2025/10/16 16:55:31 by lchapot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,7 @@ SRCS = src/main.c \
 	builtins/builtins.c \
 	builtins/pwd.c \
 	builtins/unset.c \
+	builtins/print.c \
 
 # Dossier des objets
 OBJDIR = .obj

@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/13 18:10:53 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/16 15:55:36 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	exec_built_in(t_cmd *cmd, t_general *g)
 	if (!ft_strcmp(cmd->args[0], "pwd"))
 		print_pwd(cmd);
 	if (!ft_strcmp(cmd->args[0], "env"))
-		get_env(g);                       // ou le env recup
+		get_env(g);
 	if (!ft_strcmp(cmd->args[0], "exit")) // revoir le atoi
-		manage_exit(cmd);
+		manage_exit(cmd, g);
 	if (!ft_strcmp(cmd->args[0], "echo"))
 		manage_echo(cmd);
 	if (!ft_strcmp(cmd->args[0], "cd"))

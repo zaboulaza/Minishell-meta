@@ -1,39 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/02 17:05:37 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/16 16:53:20 by lchapot          ###   ########.fr       */
+/*   Created: 2025/10/16 16:54:01 by lchapot           #+#    #+#             */
+/*   Updated: 2025/10/16 16:54:33 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
  #include "../mini.h"
 
- int	manage_echo(t_cmd *cmd)
- {
- 	int	i;
- 	int	flag;
-
- 	i = 1;
-	if (!cmd->args[1])
-		return (printf("\n"), 0);
-	while (cmd->args[i] && !ft_strcmp(cmd->args[i], "-n"))
-		i++;
-	flag = i;
-	if (!cmd->args[i])
-		return (0);
-	while (cmd->args[i])
+void print_export(t_env *env)
+{
+	while (env)
 	{
-		printf("%s", cmd->args[i]);
-		if (cmd->args[i + 1])
-			printf(" ");
-		i++;
+		printf("declare -x %s", env->key);
+		if (env->value)
+			printf("=\"%s\"", env->value);
+		printf("\n");
+		env = env->next;
 	}
- 	if (flag == 1)
- 		printf("\n");
- 	return (0);
- }
- 
+}
+
+int	print_env(t_general *g)
+{
+	while (g->envlst)
+	{
+		printf("%s=%s\n", g->envlst->key, g->envlst->value);
+		g->envlst = g->envlst->next;
+	}
+	return (0);
+}
