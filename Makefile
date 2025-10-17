@@ -6,7 +6,7 @@
 #    By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/21 12:55:13 by nsmail            #+#    #+#              #
-#    Updated: 2025/10/16 16:55:31 by lchapot          ###   ########.fr        #
+#    Updated: 2025/10/17 17:18:07 by lchapot          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,9 @@ NAME        = MINI
 # Fichiers source
 SRCS = src/main.c \
 	src/print_ast.c \
+	src/free.c\
+	src/free2.c\
+	src/init.c\
 	parser/parser.c \
 	parser/token_first.c \
 	parser/token_second.c \
@@ -48,7 +51,6 @@ SRCS = src/main.c \
 	builtins/env.c \
 	builtins/exit.c \
 	builtins/export.c \
-	builtins/free.c \
 	builtins/builtins.c \
 	builtins/pwd.c \
 	builtins/unset.c \

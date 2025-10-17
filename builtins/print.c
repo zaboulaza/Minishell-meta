@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/16 16:54:01 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/16 16:54:33 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 16:50:20 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,3 @@ void print_export(t_env *env)
 	}
 }
 
-int	print_env(t_general *g)
-{
-	while (g->envlst)
-	{
-		printf("%s=%s\n", g->envlst->key, g->envlst->value);
-		g->envlst = g->envlst->next;
-	}
-	return (0);
-}

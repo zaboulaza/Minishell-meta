@@ -12,7 +12,7 @@
 
  #include "../mini.h"
 
-static t_env	*new_env_node(const char *key, const char *value)
+static t_env	*new_exp_node(const char *key, const char *value)
 {
 	t_env	*node;
 
@@ -63,7 +63,7 @@ static int	set_env_var(t_env **envlst, const char *key, const char *value)
 		return (0);
 	}
 
-	tmp = new_env_node(key, value);
+	tmp = new_exp_node(key, value);
 	if (!tmp)
 		return (1);
 	tmp->next = *envlst;

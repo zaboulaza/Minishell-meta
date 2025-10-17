@@ -38,7 +38,7 @@ static void	unset_one(t_env **envlst, const char *key)
 		cur = cur->next;
 	}
 	ft_putstr_fd((char *)key, 2);
-	ft_putstr_fd(": not a valid identifier\n", 2);
+	ft_putstr_fd(": not a valid identifier\n", 2); //mhh?
 }
 
 void	do_unset(t_cmd *cmd, t_general *g)

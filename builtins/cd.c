@@ -6,11 +6,22 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/03 13:20:13 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/15 15:47:29 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 17:39:33 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
- #include "../mini.h"
+#include "../mini.h"
+
+char *get_env_value(t_general *g, const char *key)
+{	 
+	while (g->envlst)
+	{		 
+		if (ft_strcmp(g->envlst->key, key) == 0)
+			return (g->envlst->value);		 
+		g->envlst = g->envlst->next;	 
+	}	 
+	return (NULL);
+}
 
 void	err_cd(t_cmd *cmd, t_general *g, int flag)
 {
@@ -51,10 +62,10 @@ void	cd_home(t_general *g)
 	home = get_env_value(g, "HOME");
 	if (!home)
 		ft_putstr_fd("cd: HOME not set\n", 2);
-	chdir(home); //free(home);
+	chdir(home);
 	g->pwd->prev = g->pwd->tmp;
 	g->pwd->new = g->pwd->prev;
-	free (home);
+	free(home);
 }
 
 void	move_cd(t_cmd *cmd, t_general *g)

@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/16 18:30:30 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 17:34:35 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,6 @@ extern volatile sig_atomic_t	g_signal_status;
 // main.c
 ////////////////////////////////////////////////////////////////////////////
 int								main(int ac, char **av, char **env);
-void							creat_struct(t_general *g, int ac, char **av,
-									char **env);
-void							free_all(t_general *g);
 
 // ##############################  parser.c  ##############################
 int								parsing_general(t_general *g, t_tmp **tmp);
@@ -174,7 +171,6 @@ char							**find_arg_norm_parent(t_node *node, t_cmd *cmd,
 									t_tmp **tmp);
 
 // token_third_utils2.c
-void							free_all_(char **tab);
 size_t							count_word_(char *s, char c);
 char							*malloc_word_(char *str, char c);
 char							**ft_split_(char *s, char c);
@@ -299,29 +295,42 @@ void							heredoc_signal_handler(int sig);
 // fonction de test
 // void				print_list(t_node *node);
 void							print_list_cmd(t_cmd *cmd);
-void							free_node(t_node *node);
-void							free_cmd(t_cmd *cmd);
 void							clear_tmp(t_tmp **tmp);
 void							print_ast(t_cmd *node, int depth);
 void							print_indent(int depth);
-void							free_g(t_general *g);
 
+/*free*/
+void							clear_tmp(t_tmp **tmp);
+void							free_cmd(t_cmd *cmd);
+void							free_node(t_node *node);
+void							free_all(t_general *g);
+void							free_envlst(t_env *envlst);
+void							free_double(char **str);
+void							free_all_(char **tab);
+void							free_g(t_general *g);
+void							free_pwd(t_pwd *pwd);
+
+
+/*init*/
+void							creat_struct(t_general *g, int ac, char **av, char **env);
+void							env_add_back(t_env **lst, t_env *new);
+t_env 							*new_env_node(char *key, char *value);
+t_env 							*env_to_envlst(char **envp);
 /*BUILT INS*/
 void							exec_built_in(t_cmd *cmd, t_general *g);
-
+char							**lst_to_envp(t_env *lst);
 t_satoi							ps_atoi(char *str);
 int								ft_strcmp(const char *s1, const char *s2);
 int								print_pwd(t_cmd *cmd);
-void	manage_exit(t_cmd *cmd, t_general *g);
+void							manage_exit(t_cmd *cmd, t_general *g);
 void							move_cd(t_cmd *cmd, t_general *g);
-void							free_double(char **str);
 int								manage_echo(t_cmd *cmd);
 void							do_export(t_cmd *cmd, t_general *g);
 void							do_unset(t_cmd *cmd, t_general *g);
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
 char							*get_env_value(t_general *g, const char *key);
-t_env							*env_to_envlst(char **envp);
+char    						*ft_strjoin3(const char *s1, const char *s2, const char *s3);
 int								print_env(t_general *g);
 void							print_export(t_env *env);
 

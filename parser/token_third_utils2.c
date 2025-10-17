@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_third_utils2.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/31 21:06:06 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/01 20:20:17 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/17 17:20:56 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
-
-void	free_all_(char **tab)
-{
-	size_t	i;
-
-	i = 0;
-	while (tab[i])
-	{
-		free(tab[i]);
-		i++;
-	}
-	free(tab);
-}
 
 size_t	count_word_(char *s, char c)
 {

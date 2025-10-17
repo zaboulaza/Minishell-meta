@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nsmail <nsmail@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/14 16:31:51 by nsmail           ###   ########.fr       */
+/*   Updated: 2025/10/17 14:59:22 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ char	*find_in_path(char *arg, t_general *g, int j, int len)
 {
 	char	*tmp;
 	char	*one_line;
+	char	**env_curr;
 
 	one_line = NULL;
 	j = 1;
@@ -77,12 +78,12 @@ char	*find_in_path(char *arg, t_general *g, int j, int len)
 	tmp = ft_substr(arg, 1, j - 1);
 	tmp = ft_strjoin(tmp, "=");
 	len = ft_strlen(tmp);
-	j = 0;
-	while (g->env[j])
+	j = -1;
+	env_curr = lst_to_envp(g->envlst);
+	while (env_curr[++j])
 	{
-		if (ft_strncmp(tmp, g->env[j], len) == 0)
-			one_line = g->env[j];
-		j++;
+		if (ft_strncmp(tmp, env_curr[j], len) == 0)
+			one_line = env_curr[j];
 	}
 	if (!one_line)
 		return (free(tmp), ft_strdup(""));
