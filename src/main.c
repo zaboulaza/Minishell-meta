@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:24:27 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/17 16:43:19 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:07:00 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ int	main(int ac, char **av, char **env)
 
 	creat_struct(&g, ac, av, env);
 	g.envlst = env_to_envlst(env);
+	if (!g.envlst)
+		return (perror("env_to_envlst"), 1);
 	while (1)
 	{
 		g.node = NULL;
@@ -28,8 +30,7 @@ int	main(int ac, char **av, char **env)
 		g_signal_status = 0;
 		ft_signal();
 		g.one_line = readline("mini ✗ ");
-		if (!g.envlst)
-			return (perror("env_to_envlst"), 1);
+
 		if (g_signal_status != 0)
 		{
 			g.status = g_signal_status;

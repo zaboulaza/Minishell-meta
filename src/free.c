@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 16:43:02 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/17 17:21:04 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 17:51:11 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@ void	free_all(t_general *g)
 		free_all_(g->path);
 		g->path = NULL;
 	}
-	if (g->envlst)
-	{
-		free_envlst(g->envlst);
-		g->env = NULL;
-	}
-	if (g->pwd)
-	{
-		free_pwd(g->pwd);
-		g->pwd = NULL;
-	}
+	//if (g->envlst)
+	//{
+	//	free_envlst(g->envlst);
+	//	g->env = NULL;
+	//}
+	//if (g->pwd)
+	//{
+	//	free_pwd(g->pwd);
+	//	g->pwd = NULL;
+	//}
 }
 
 void	clear_tmp(t_tmp **tmp)

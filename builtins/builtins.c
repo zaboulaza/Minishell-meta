@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/22 18:09:45 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/17 17:41:54 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:10:48 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	exec_built_in(t_cmd *cmd, t_general *g)
 	if (!ft_strcmp(cmd->args[0], "pwd"))
 		print_pwd(cmd);
 	if (!ft_strcmp(cmd->args[0], "env")) //commande dapres bug
-		print_env(g);
+		print_env(cmd, g);
 	if (!ft_strcmp(cmd->args[0], "exit")) // revoir le atoi
 		manage_exit(cmd, g);
 	if (!ft_strcmp(cmd->args[0], "echo"))

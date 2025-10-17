@@ -6,18 +6,31 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/17 16:50:26 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:19:37 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../mini.h"
 
-int	print_env(t_general *g)
+void	print_env(t_cmd *cmds, t_general *g)
 {
-	while (g->envlst)
+	char	**env_curr;
+	int		i;
+
+	i = 0;
+	if (cmds->args[1] && ft_strcmp(cmds->args[1], "env"))
 	{
-		printf("%s=%s\n", g->envlst->key, g->envlst->value);
-		g->envlst = g->envlst->next;
+		ft_putstr_fd("env: ", 2);
+		ft_putstr_fd(cmds->args[1], 2);
+		ft_putstr_fd(": no such file or directory\n", 2);
+		//return (127);
+		return ;
 	}
-	return (0);
+	env_curr = lst_to_envp(g->envlst);
+	while (env_curr[i])
+	{
+		printf("%s\n", env_curr[i]);
+		i++;
+		//return (0);
+	}
 }

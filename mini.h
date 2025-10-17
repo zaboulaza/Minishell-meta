@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/21 13:14:12 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/17 17:34:35 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:11:12 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -310,7 +310,6 @@ void							free_all_(char **tab);
 void							free_g(t_general *g);
 void							free_pwd(t_pwd *pwd);
 
-
 /*init*/
 void							creat_struct(t_general *g, int ac, char **av, char **env);
 void							env_add_back(t_env **lst, t_env *new);
@@ -319,19 +318,23 @@ t_env 							*env_to_envlst(char **envp);
 /*BUILT INS*/
 void							exec_built_in(t_cmd *cmd, t_general *g);
 char							**lst_to_envp(t_env *lst);
-t_satoi							ps_atoi(char *str);
-int								ft_strcmp(const char *s1, const char *s2);
-int								print_pwd(t_cmd *cmd);
+
 void							manage_exit(t_cmd *cmd, t_general *g);
 void							move_cd(t_cmd *cmd, t_general *g);
 int								manage_echo(t_cmd *cmd);
 void							do_export(t_cmd *cmd, t_general *g);
 void							do_unset(t_cmd *cmd, t_general *g);
+
 int								get_env(t_general *g);
 void							init_env(t_env **env_list, char **env);
 char							*get_env_value(t_general *g, const char *key);
+
 char    						*ft_strjoin3(const char *s1, const char *s2, const char *s3);
-int								print_env(t_general *g);
+t_satoi							ps_atoi(char *str);
+int								ft_strcmp(const char *s1, const char *s2);
+
+int								print_pwd(t_cmd *cmd);
+void							print_env(t_cmd *cmd, t_general *g);
 void							print_export(t_env *env);
 
 #endif
