@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/30 21:54:11 by nsmail            #+#    #+#             */
-/*   Updated: 2025/10/17 14:59:22 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:54:01 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*find_in_path(char *arg, t_general *g, int j, int len)
 		if (ft_strncmp(tmp, env_curr[j], len) == 0)
 			one_line = env_curr[j];
 	}
+	//free_all_(env_curr);
 	if (!one_line)
 		return (free(tmp), ft_strdup(""));
 	one_line = ft_substr(one_line, len, ft_strlen(one_line) - len);

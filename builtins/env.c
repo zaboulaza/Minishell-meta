@@ -6,7 +6,7 @@
 /*   By: lchapot <lchapot@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/02 14:53:49 by lchapot           #+#    #+#             */
-/*   Updated: 2025/10/17 18:19:37 by lchapot          ###   ########.fr       */
+/*   Updated: 2025/10/17 18:53:51 by lchapot          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,5 @@ void	print_env(t_cmd *cmds, t_general *g)
 		i++;
 		//return (0);
 	}
+	//free_all_(env_curr);
 }
